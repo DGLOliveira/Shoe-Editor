@@ -1,7 +1,6 @@
+import { useState } from "react";
+import Shoe from "./assets/ShoeRender.js";
 import "./styles.css";
-
-import React, { useState } from "react";
-import Shoe from "./assets/ShoeRender";
 
 export default function App() {
   const [controls, setControls] = useState({
