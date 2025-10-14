@@ -1,7 +1,9 @@
-{
+{  
+  "homepage": "https://dgloliveira.github.io/Shoe-Personalizer/",
   "name": "shoe-editor",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
