@@ -1,0 +1,124 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  overflow: hidden;
+}
+header {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 96%;
+  background: lightslategray;
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+nav {
+  display: flex;
+  width: 140px;
+  padding-left: 2%;
+  margin-right: 2%;
+  justify-content: space-around;
+}
+nav > h2:hover {
+  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+}
+.selectedMenu {
+  color: darkred;
+}
+input:hover {
+  cursor: pointer;
+}
+input[type="color"] {
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: lightgray;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0px;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch {
+  width: 40px;
+  height: 18px;
+  background: darkred;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+.switch:hover {
+  cursor: pointer;
+}
+.switchOn {
+  background: darkgreen;
+}
+.switchButton {
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  margin: 1px;
+  margin-left: 14px;
+  background: ghostwhite;
+  border: 1px solid gray;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.switchButtonOn {
+  margin-left: -5px;
+}
+ul {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 60px;
+  width: 120px;
+  right: 0px;
+  height: 100%;
+  background-color: rgba(119, 136, 153, 0.85);
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  z-index: 1;
+  transition: 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+.expandMenu {
+  transition-delay: 0.3s;
+  opacity: 1;
+  visibility: visible;
+}
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
+  padding-bottom: 5%;
+  border-bottom: 1px solid black;
+}
+@media (min-width: 1000px) {
+  ul {
+    display: flex;
+  }
+}
