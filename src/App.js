@@ -63,15 +63,14 @@ export default function App() {
                 }
               />
             </li>
-          ) : (
-            <></>
-          )
+          ) : null
         )}
       </ul>
       <ul className={extrasMenu ? "expandMenu" : ""}>
         {Object.keys(controls).map((name, index, arr) =>
           typeof controls[arr[index]] === "boolean" ? (
             <li
+              key={index}
               onClick={() =>
                 setControls({
                   ...controls,
@@ -86,7 +85,7 @@ export default function App() {
                 <input
                   name={name}
                   type="checkbox"
-                  checked={controls[arr[index]]}
+                  defaultChecked={controls[arr[index]]}
                 />
                 <span
                   className={
@@ -97,9 +96,7 @@ export default function App() {
                 />
               </div>
             </li>
-          ) : (
-            <></>
-          )
+          ) : null
         )}
       </ul>
       <Shoe value={controls} />
