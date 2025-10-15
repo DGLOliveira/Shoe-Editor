@@ -106,8 +106,8 @@ input[type="checkbox"] {
 .switch {
   width: 40px;
   height: 18px;
-  background: darkred;
-  border: 1px solid lightgray;
+  background: lightsalmon;
+  border: 2px inset black;
   border-radius: 10px;
   transition: 0.5s;
 }
@@ -117,23 +117,25 @@ input[type="checkbox"] {
 }
 
 .switchOn {
-  background: darkgreen;
+  background: lightgreen;
 }
 
 .switchButton {
   position: absolute;
-  height: 14px;
-  width: 14px;
-  margin: 1px;
-  margin-left: 14px;
-  background: ghostwhite;
-  border: 1px solid gray;
+  height: 12px;
+  width: 12px;
+  margin: 0px;
+  margin-top: -1px;
+  margin-left: 13px;
+  background: red;
+  border: 4px outset rgb(172, 172, 172);
   border-radius: 50%;
   transition: 0.5s;
 }
 
 .switchButtonOn {
-  margin-left: -5px;
+  background: limegreen;
+  margin-left: -7px;
 }
 
 ul {
