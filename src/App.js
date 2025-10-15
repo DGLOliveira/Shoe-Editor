@@ -33,23 +33,22 @@ export default function App() {
   }
   return (
     <>
-      <header>
+      <nav>
         <h1>Shoe Editor</h1>
-        <nav>
-          <h2
-            onClick={() => handleNav("colors")}
-            className={colorMenu ? "selectedMenu" : ""}
-          >
-            |Colors|
-          </h2>
-          <h2
-            onClick={() => handleNav("extras")}
-            className={extrasMenu ? "selectedMenu" : ""}
-          >
-            |Extras|
-          </h2>
-        </nav>
-      </header>
+        <div>
+        <h2
+          onClick={() => handleNav("colors")}
+          className={colorMenu ? "selectedMenu" : ""}
+        >
+          Colours
+        </h2>
+        <h2
+          onClick={() => handleNav("extras")}
+          className={extrasMenu ? "selectedMenu" : ""}
+        >
+          Extras
+        </h2></div>
+      </nav>
       <ul className={colorMenu ? "expandMenu" : ""}>
         {Object.keys(controls).map((name, index, arr) =>
           typeof controls[arr[index]] === "string" ? (
