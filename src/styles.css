@@ -149,8 +149,8 @@ ul {
   display: flex;
   flex-direction: column;
   top: 60px;
-  width: 120px;
-  right: 0px;
+  width: 150px;
+  right: -150px;
   height: 100%;
   background-color: rgba(119, 136, 153, 0.85);
   margin: 0;
@@ -158,14 +158,13 @@ ul {
   list-style: none;
   z-index: 1;
   transition: 0.3s;
-  opacity: 0;
-  visibility: hidden;
+  box-shadow: -1px 0 3px black;
+  box-sizing: border-box;
 }
 
 .expandMenu {
+  right: 0px;
   transition-delay: 0.3s;
-  opacity: 1;
-  visibility: visible;
 }
 
 li {
