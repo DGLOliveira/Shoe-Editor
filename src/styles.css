@@ -60,8 +60,8 @@ nav {
       background: white;
       font-size: 20px;
       text-shadow: 0 0 2px black inset;
-      box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5), 0px 0px 0px hsla(0, 0%, 0%, 0.5) inset;
-      transition: 0.2s;
+      box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5);
+
       &:hover {
         cursor: pointer;
         color: green
@@ -71,7 +71,7 @@ nav {
         border-style: inset;
         background: lightgray;
         border-color: green;
-        box-shadow: 0px 0px 0px hsla(0, 0%, 0%, 0.5), 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
+        box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
       }
     }
   }
@@ -88,6 +88,7 @@ input[type="color"] {
   padding: 0px;
   border: 4px inset lightgray;
   box-sizing: border-box;
+
   &::-moz-color-swatch {
     border-width: 0;
     border-radius: 12px;
@@ -124,12 +125,15 @@ input[type="checkbox"] {
   transition: 0.5s;
   box-sizing: border-box;
   box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5) inset;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
+
   &.switchOn {
     background: lightslategray;
   }
+
   &>.switchButton {
     position: absolute;
     height: 12px;
@@ -143,6 +147,7 @@ input[type="checkbox"] {
     box-shadow: 1px 1px 2px black;
     transition: 0.5s;
   }
+
   &>.switchButtonOn {
     background: limegreen;
     margin-left: -11px;
@@ -160,7 +165,7 @@ ul {
   height: 100%;
   background-color: rgba(119, 136, 153, 0.85);
   margin: 0;
-  padding: 10px;
+  padding: 0;
   list-style: none;
   z-index: 1;
   transition: 0.3s;
@@ -176,14 +181,13 @@ ul {
 li {
   display: flex;
   align-items: center;
+  font-weight: bold;
   justify-content: space-between;
+  width:100%;
   margin-top: 5%;
+  padding-left:10px;
+  padding-right: 10px;
   padding-bottom: 5%;
-  border-bottom: 1px solid black;
-}
-
-@media (min-width: 1000px) {
-  ul {
-    display: flex;
-  }
+  box-sizing: border-box;
+  border-bottom: 2px solid gray;
 }
