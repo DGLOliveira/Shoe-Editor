@@ -1,6 +1,9 @@
-export default function Navbar(props) {
+export default function Navbar(props : {
+    menu: string
+    setMenu: React.Dispatch<React.SetStateAction<string>>
+}) {
     const { menu, setMenu } = props
-    const handleNav = (value) => {
+    const handleNav = (value : string) => {
         if (menu === value) setMenu("none")
         else setMenu(value)
     }

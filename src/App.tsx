@@ -7,7 +7,7 @@ import "./styles.css";
 export default function App() {
 
   const [menu, setMenu] : [string, React.Dispatch<React.SetStateAction<string>>] 
-  = useState("none");
+  = useState("none")
   const DefaultColors : {[key: string]: string } = {
     'Base': "#525588",
     'Sole': "#FFFFFF",
@@ -22,10 +22,10 @@ export default function App() {
   }
   const [colors, setColors] : [{[key: string]: string }, 
   React.Dispatch<React.SetStateAction<{[key: string]: string }>>] 
-  = useState(DefaultColors);
+  = useState(DefaultColors)
   const [extras, setExtras] : [{[key: string]: boolean }, 
   React.Dispatch<React.SetStateAction<{[key: string]: boolean }>>] 
-  = useState(DefaultExtras);
+  = useState(DefaultExtras)
 
   return (
     <>

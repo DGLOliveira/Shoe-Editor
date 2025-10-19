@@ -1,10 +1,10 @@
 export default function Menu(props: 
     {
-        menu: string;
-        colors: {[key: string]: string };
-        setColors: React.Dispatch<React.SetStateAction<{[key: string]: string }>>;
-        extras: {[key: string]: boolean };
-        setExtras: React.Dispatch<React.SetStateAction<{[key: string]: boolean }>>;
+        menu: string
+        colors: {[key: string]: string }
+        setColors: React.Dispatch<React.SetStateAction<{[key: string]: string }>>
+        extras: {[key: string]: boolean }
+        setExtras: React.Dispatch<React.SetStateAction<{[key: string]: boolean }>>
     }
 ) {
     const { menu, colors, setColors, extras, setExtras } = props
