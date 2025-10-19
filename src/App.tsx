@@ -8,19 +8,24 @@ export default function App() {
 
   const [menu, setMenu] : [string, React.Dispatch<React.SetStateAction<string>>] 
   = useState("none");
-  const DefaultControl : {[key: string]: string | boolean } = {
+  const DefaultColors : {[key: string]: string } = {
     'Base': "#525588",
     'Sole': "#FFFFFF",
     'Laces': "#FFFFFF",
     'Detail1': "#525588",
     'Detail2': "#ae1010",
-    'Front': true,
-    'Back': true,
-    'Side': true
   }
-  const [controls, setControls] : [{[key: string]: string | boolean }, 
-  React.Dispatch<React.SetStateAction<{[key: string]: string | boolean }>>] 
-  = useState(DefaultControl);
+  const DefaultExtras : {[key: string]: boolean } = {
+    'Side': true,
+    'Front': true,
+    'Back': true
+  }
+  const [colors, setColors] : [{[key: string]: string }, 
+  React.Dispatch<React.SetStateAction<{[key: string]: string }>>] 
+  = useState(DefaultColors);
+  const [extras, setExtras] : [{[key: string]: boolean }, 
+  React.Dispatch<React.SetStateAction<{[key: string]: boolean }>>] 
+  = useState(DefaultExtras);
 
   return (
     <>
@@ -30,11 +35,14 @@ export default function App() {
       />
       <Menu
         menu={menu}
-        controls={controls}
-        setControls={setControls}
+        colors={colors}
+        setColors={setColors}
+        extras={extras}
+        setExtras={setExtras}
       />
       <Scenario
-       value={controls} 
+       colors={colors}
+       extras={extras}
        />
     </>
   );

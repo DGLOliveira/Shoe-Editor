@@ -1,55 +1,59 @@
-export default function Menu(props) {
-    const { menu, controls, setControls } = props
+export default function Menu(props: 
+    {
+        menu: string;
+        colors: {[key: string]: string };
+        setColors: React.Dispatch<React.SetStateAction<{[key: string]: string }>>;
+        extras: {[key: string]: boolean };
+        setExtras: React.Dispatch<React.SetStateAction<{[key: string]: boolean }>>;
+    }
+) {
+    const { menu, colors, setColors, extras, setExtras } = props
     return (
         <>
             <ul className={menu === "colors" ? "expandMenu" : ""}>
-                {Object.keys(controls).map((name, index, arr) =>
-                    typeof controls[arr[index]] === "string" ? (
+                {Object.keys(colors).map((name, index, arr) =>
                         <li key={index}>
                             {name}
                             <input
                                 type="color"
                                 name={name}
-                                value={controls[arr[index]]}
+                                value={colors[arr[index]]}
                                 onChange={(e) =>
-                                    setControls({ ...controls, [e.target.name]: e.target.value })
+                                    setColors({ ...colors, [e.target.name]: e.target.value })
                                 }
                             />
                         </li>
-                    ) : null
                 )}
             </ul>
             <ul className={menu === "extras" ? "expandMenu" : ""}>
-                {Object.keys(controls).map((name, index, arr) =>
-                    typeof controls[arr[index]] === "boolean" ? (
+                {Object.keys(extras).map((name, index, arr) =>
                         <li
                             key={index}
                             onClick={() =>
-                                setControls({
-                                    ...controls,
-                                    [arr[index]]: !controls[arr[index]]
+                                setExtras({
+                                    ...extras,
+                                    [arr[index]]: !extras[arr[index]]
                                 })
                             }
                         >
                             {name}
                             <div
-                                className={controls[arr[index]] ? "switch switchOn" : "switch"}
+                                className={extras[arr[index]] ? "switch switchOn" : "switch"}
                             >
                                 <input
                                     name={name}
                                     type="checkbox"
-                                    defaultChecked={controls[arr[index]]}
+                                    defaultChecked={extras[arr[index]]}
                                 />
                                 <span
                                     className={
-                                        controls[arr[index]]
+                                        extras[arr[index]]
                                             ? "switchButton switchButtonOn"
                                             : "switchButton "
                                     }
                                 />
                             </div>
                         </li>
-                    ) : null
                 )}
             </ul>
         </>
