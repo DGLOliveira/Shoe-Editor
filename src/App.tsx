@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "./components/Navbar.js";
-import Menu from "./components/Menu.js";
+import Navbar from "./components/Navbar.tsx";
+import Menu from "./components/Menu.tsx";
 import Scenario from "./components/Scenario.js";
 import "./styles.css";
 
