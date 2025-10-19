@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { PresentationControls, useGLTF } from "@react-three/drei";
 import Shoe from "../assets/Shoe1.glb";
 
 export default function ShoeRender(props) {
@@ -29,15 +29,20 @@ export default function ShoeRender(props) {
   }
   return (
     <Canvas>
-      <OrbitControls enableRotate={true} enablePan={false} maxDistance={6} />
+      <PresentationControls 
+        enabled={true}
+        cursor={true}
+        config={{ mass: 1, tension: 100, friction: 26 }}
+      >
+        <Model />
+      </PresentationControls>
       <ambientLight intensity={0.2} />
       <spotLight
-        position={[-4.5, 2, -4.5]}
+        position={[4.5, 2, 4.5]}
         castShadow
         intensity={0.4}
-        angle={0.4}
+        angle={0.6}
       />
-      <Model />
     </Canvas>
   );
 }
