@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
-import { PresentationControls, useGLTF } from "@react-three/drei";
+import { PresentationControls, OrbitControls, useGLTF } from "@react-three/drei";
 import Shoe from "../assets/Shoe1.glb";
 
 export default function ShoeRender(props) {
@@ -29,7 +29,14 @@ export default function ShoeRender(props) {
   }
   return (
     <Canvas>
-      <PresentationControls 
+      <OrbitControls
+        target={[0, 0, 0]}
+        enablePan={false}
+        enableRotate={false}
+        enableZoom={true}
+        zoomSpeed={0.5}
+      />
+      <PresentationControls
         enabled={true}
         cursor={true}
         config={{ mass: 1, tension: 100, friction: 26 }}
