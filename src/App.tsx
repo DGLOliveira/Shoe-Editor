@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, useCallback } from "react";
 import Navbar from "./components/Navbar.tsx";
 import Menu from "./components/Menu.tsx";
 import Scenario from "./components/Scenario.js";
+import urlControler from "./controllers/url.js";
 import "./styles.css";
 
 export default function App() {
@@ -37,11 +38,17 @@ export default function App() {
     })
     setColors(newColors)
     setExtras(newExtras)
+
   }
 
   useEffect(() => {
     importData()
   }, [model])
+
+  useEffect(() => {
+    if(model && colors && extras)
+      urlControler.prototype.update(model, colors, extras)
+  },[model, colors, extras])
 
   return (
     <>
