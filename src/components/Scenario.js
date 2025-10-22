@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { PresentationControls, OrbitControls, useGLTF } from "@react-three/drei";
-import Shoe from "../assets/Shoe1.glb";
+import Shoe from "../assets/Canvas_Sneaker.glb";
 
 export default function ShoeRender(props) {
   const { colors, extras } = props;
