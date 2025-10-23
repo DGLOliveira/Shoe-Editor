@@ -5,7 +5,6 @@ export default class urlController {
     }
 
     // Updates URL with new values and pushes to history
-    // WARNING: Sliding thru color swatch will overflow history and throw error "Insecure operation"
     update(model, colors, extras) {
         let params = new URLSearchParams(window.location.search)
         //Clear all keys
