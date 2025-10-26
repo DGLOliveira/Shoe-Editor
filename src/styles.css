@@ -54,9 +54,9 @@ nav {
       border-color: gray;
       border-width: 5px;
       border-style: outset;
-      border-radius: 20px;
-      margin-right: 5px;
+      border-radius: 0px;
       padding: 6px;
+      margin-right:5px;
       background: white;
       font-size: 20px;
       text-shadow: 0 0 2px black inset;
@@ -70,7 +70,7 @@ nav {
       &.selectedMenu {
         border-style: inset;
         background: lightgray;
-        border-color: green;
+        color: green;
         box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
       }
     }
@@ -84,14 +84,12 @@ input:hover {
 input[type="color"] {
   width: 40px;
   height: 20px;
-  border-radius: 12px;
   padding: 0px;
   border: 4px inset lightgray;
   box-sizing: border-box;
 
   &::-moz-color-swatch {
     border-width: 0;
-    border-radius: 12px;
     box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
   }
 
@@ -101,7 +99,6 @@ input[type="color"] {
 
   &::-webkit-color-swatch {
     border-width: 0;
-    border-radius: 12px;
     box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
   }
 
@@ -200,7 +197,6 @@ li {
   border-color: gray;
   border-width: 3px;
   border-style: outset; 
-  border-radius: 10px;
   background: white;
   box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
   cursor: pointer;
@@ -220,7 +216,6 @@ li {
   border-width: 3px;
   border-style: inset;
   border-color: gray;
-  border-radius: 5px;
   background: white;
   box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
   width: 100%;
