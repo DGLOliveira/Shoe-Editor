@@ -191,3 +191,42 @@ li {
   box-sizing: border-box;
   border-bottom: 2px solid gray;
 }
+
+#copyLinkButton{
+  width: 100%;
+  margin:5px;
+  font-size: 15px;
+  box-sizing: border-box;
+  border-color: gray;
+  border-width: 3px;
+  border-style: outset; 
+  border-radius: 10px;
+  background: white;
+  box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
+  cursor: pointer;
+  &:hover{
+    color: deepskyblue;
+    text-decoration: underline;
+  }
+  &:active{
+    border-style: inset;
+    box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5) inset;
+  }
+}
+
+#linkBox{
+  box-sizing: border-box;
+  height:200px;
+  border-width: 3px;
+  border-style: inset;
+  border-color: gray;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
+  width: 100%;
+  resize: none;
+  &:focus{
+    border-style: outset;
+    box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5) inset;
+  }
+}

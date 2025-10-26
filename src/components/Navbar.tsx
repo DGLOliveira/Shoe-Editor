@@ -23,6 +23,11 @@ export default function Navbar(props : {
                 >
                     Extras
                 </h2>
+                <h2
+                    onClick={() => handleNav("share")}
+                    className={menu === "share" ? "selectedMenu" : ""}>
+                    Share
+                </h2>
             </div>
         </nav>
     )

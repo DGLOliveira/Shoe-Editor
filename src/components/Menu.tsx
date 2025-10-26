@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 export default function Menu(props: 
     {
         menu: string
@@ -8,6 +9,11 @@ export default function Menu(props:
     }
 ) {
     const { menu, colors, setColors, extras, setExtras } = props
+    const [url, setUrl] : [string, React.Dispatch<React.SetStateAction<string>>] = useState(window.location.href)
+    useEffect(() => {
+        if(menu === "share") setUrl(window.location.href)
+    },[menu])
+
     return (
         <>
             <ul className={menu === "colors" ? "expandMenu" : ""}>
@@ -55,6 +61,21 @@ export default function Menu(props:
                             </div>
                         </li>
                 )}
+            </ul>
+            <ul className={menu === "share" ? "expandMenu" : ""}>
+                <li style={{flexDirection: "column"}}>
+                    <button 
+                    id="copyLinkButton"
+                    onClick={() => navigator.clipboard.writeText(url)}
+                    >Copy Link
+                    </button>
+                    <br/>
+                    <textarea 
+                    id="linkBox"
+                    value={url} 
+                    readOnly={true} 
+                    />
+                </li>
             </ul>
         </>
     );
