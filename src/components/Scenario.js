@@ -16,7 +16,7 @@ export default function ShoeRender(props) {
     materials.Detail2.color = new THREE.Color(colors.Detail2);
     for (let i = 0; i < meshes.length; i++) {
       if (meshes[i].name === "Circle") {
-        meshes[i].visible = extras.Side;
+        meshes[i].visible = extras.Circle;
       }
       if (meshes[i].name === "Front") {
         meshes[i].visible = extras.Front;
