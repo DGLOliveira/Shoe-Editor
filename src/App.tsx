@@ -44,33 +44,59 @@ export default function App() {
 
   const setInitModel = async () => {
     let params = urlControler.prototype.get()
+    console.log(params)
     let initModel = {}
+    let badURLModel = true
     //Check if URL has Category and Model values and they exist in ModelList
-    if (params.Category && params.Model) {
-      let found = false
+    if (params.Category && params.Name) {
       ModelList.map((item) => {
-        if (item.Category === params.Category && item.Name === params.Model) {
+        if (item.Category === params.Category && item.Name === params.Name) {
           setModel(item)
           initModel = item
-          found = true
+          badURLModel = false
         }
       })
-      //If URL values don't exist in ModelList, use default
-      if (!found) {
-        initModel = DEFAULT_MODEL
-      }
     }
-    //If URL values don't exist, use default
-    else {
+    //If URL model values don't exist or don't exist in ModelList, use default model
+    if (badURLModel) {
       initModel = DEFAULT_MODEL
     }
+    //Import model data
     let defaultValues = await importData(initModel)
-    /*
-      Create code for validating and assigning url param values
-    */
     setModel(initModel)
-    setColors(defaultValues.colors)
-    setExtras(defaultValues.extras)
+    //Assume all values are bad if model values are bad
+    if (badURLModel) {
+      console.log("Bad URL Model")
+      setColors(defaultValues.colors)
+      setExtras(defaultValues.extras)
+    }
+    //Else compare URL values to default values, validate and assign, otherwise assign default value
+    else {
+      let newExtras: { [key: string]: boolean } = {}
+      let newColors: { [key: string]: string } = {}
+      Object.keys(defaultValues.extras).map((key: string) => {
+        if (params[key] !== undefined) {
+          if (params[key] === "true") {
+            newExtras[key] = true
+          } else if (params[key] === "false") {
+            newExtras[key] = false
+          } else {
+            newExtras[key] = defaultValues.extras[key]
+          }
+        }
+      })
+      Object.keys(defaultValues.colors).map((key: string) => {
+        if (params[key] !== undefined) {
+          if (/^#[0-9A-F]{6}$/i.test(params[key])) {
+            newColors[key] = params[key]
+          } else {
+            newColors[key] = defaultValues.colors[key]
+          }
+        }
+      })
+      setExtras(newExtras)
+      setColors(newColors)
+    }
   }
 
   //Runs on page load
