@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Shoe-Editor/static/css/main.56cef288.css",
-    "main.js": "/Shoe-Editor/static/js/main.f1ec56e6.js",
+    "main.css": "/Shoe-Editor/static/css/main.cc20de15.css",
+    "main.js": "/Shoe-Editor/static/js/main.6fbea5f9.js",
     "static/js/994.867e2ae9.chunk.js": "/Shoe-Editor/static/js/994.867e2ae9.chunk.js",
     "static/media/Canvas_Sneaker.glb": "/Shoe-Editor/static/media/Canvas_Sneaker.d022096c28c0dccf1bb3.glb",
     "index.html": "/Shoe-Editor/index.html",
-    "main.56cef288.css.map": "/Shoe-Editor/static/css/main.56cef288.css.map",
-    "main.f1ec56e6.js.map": "/Shoe-Editor/static/js/main.f1ec56e6.js.map"
+    "main.cc20de15.css.map": "/Shoe-Editor/static/css/main.cc20de15.css.map",
+    "main.6fbea5f9.js.map": "/Shoe-Editor/static/js/main.6fbea5f9.js.map"
   },
   "entrypoints": [
-    "static/css/main.56cef288.css",
-    "static/js/main.f1ec56e6.js"
+    "static/css/main.cc20de15.css",
+    "static/js/main.6fbea5f9.js"
   ]
 }
