@@ -12,66 +12,49 @@ body,
 nav {
   position: absolute;
   display: flex;
-  width: 140px;
   top: 0;
   left: 0;
   height: 60px;
   width: 100%;
-  padding-right: 2%;
-  background: lightslategray;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   z-index: 2;
-  box-shadow: 0 1px 3px black;
+  background:white;
 
   & h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 270px;
-    height: 85%;
-    padding-left: 5px;
-    padding-right: 10px;
+    width: auto;
+    padding: 5px 10px 5px 10px;
+    font-size: 28px;
+    height: auto;
     box-sizing: border-box;
-    border-right: 2px solid black;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    border-radius: 0 15px 15px 0;
-    text-shadow: 0 0 2px white;
-    background: lightgray;
-    font-style: italic;
-    text-decoration: underline;
+    margin-left: 10px;
+    border: 2px solid black;
+    border-radius: 15px;
+    transform: skewX(-10deg);
   }
 
   & div {
     display: flex;
     flex-direction: row;
     justify-content: right;
-    width: 100%;
 
     & h2 {
-      border-color: gray;
-      border-width: 5px;
-      border-style: outset;
       border-radius: 0px;
       padding: 6px;
-      margin-right:5px;
-      background: white;
+      margin-right: 5px;
       font-size: 20px;
-      text-shadow: 0 0 2px black inset;
-      box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5);
 
       &:hover {
         cursor: pointer;
-        color: green
+        text-decoration: underline;
       }
 
       &.selectedMenu {
-        border-style: inset;
-        background: lightgray;
-        color: green;
-        box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
+        text-decoration: underline;
       }
     }
   }
@@ -85,12 +68,12 @@ input[type="color"] {
   width: 40px;
   height: 20px;
   padding: 0px;
-  border: 4px inset lightgray;
+  border: 2px solid dimgray;
+  border-radius: 10px;
   box-sizing: border-box;
 
   &::-moz-color-swatch {
     border-width: 0;
-    box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
   }
 
   &::-moz-color-swatch-wrapper {
@@ -99,7 +82,6 @@ input[type="color"] {
 
   &::-webkit-color-swatch {
     border-width: 0;
-    box-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.5) inset;
   }
 
   &::-webkit-color-swatch-wrapper {
@@ -116,38 +98,34 @@ input[type="checkbox"] {
 .switch {
   width: 40px;
   height: 20px;
-  background: lightslategray;
-  border: 4px inset lightgray;
+  border: 2px solid gray;
   border-radius: 12px;
   transition: 0.5s;
   box-sizing: border-box;
-  box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5) inset;
 
   &:hover {
     cursor: pointer;
   }
 
   &.switchOn {
-    background: lightslategray;
   }
 
   &>.switchButton {
     position: absolute;
-    height: 12px;
-    width: 12px;
+    height: 16px;
+    width: 16px;
     margin: 0px;
-    margin-top: -3px;
-    margin-left: 9px;
+    margin-top: -2px;
+    margin-left: 12px;
     background: red;
-    border: 4px outset lightgray;
+    border: 2px solid dimgray;
     border-radius: 50%;
-    box-shadow: 1px 1px 2px black;
     transition: 0.5s;
   }
 
   &>.switchButtonOn {
-    background: limegreen;
     margin-left: -11px;
+    background: limegreen;
   }
 }
 
@@ -160,14 +138,13 @@ ul {
   width: 150px;
   right: -150px;
   height: 100%;
-  background-color: rgba(119, 136, 153, 0.85);
   margin: 0;
   padding: 0;
   list-style: none;
   z-index: 1;
   transition: 0.3s;
-  box-shadow: -1px 0 3px black;
   box-sizing: border-box;
+  border-top: 1px solid gray;
 }
 
 .expandMenu {
@@ -178,50 +155,43 @@ ul {
 li {
   display: flex;
   align-items: center;
-  font-weight: bold;
+  font-size:18px;
   justify-content: space-between;
-  width:100%;
-  margin-top: 5%;
-  padding-left:10px;
+  width: 100%;
+  padding-top: 5%;
   padding-right: 10px;
+  padding-left: 10px;
   padding-bottom: 5%;
   box-sizing: border-box;
-  border-bottom: 2px solid gray;
+  border-bottom: 1px solid gray;
+  background:white;
 }
 
-#copyLinkButton{
+#copyLinkButton {
   width: 100%;
-  margin:5px;
+  margin: 5px;
   font-size: 15px;
   box-sizing: border-box;
   border-color: gray;
-  border-width: 3px;
-  border-style: outset; 
+  border-width: 1px;
+  border-style: outset;
+  border-radius: 12px;
   background: white;
-  box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
   cursor: pointer;
-  &:hover{
-    color: green;
+
+  &:hover {
     text-decoration: underline;
-  }
-  &:active{
-    border-style: inset;
-    box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5) inset;
   }
 }
 
-#linkBox{
+#linkBox {
   box-sizing: border-box;
-  height:200px;
-  border-width: 3px;
-  border-style: inset;
+  height: 200px;
+  border-width: 1px;
+  border-style: solid;
   border-color: gray;
   background: white;
-  box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5);
   width: 100%;
   resize: none;
-  &:focus{
-    border-style: outset;
-    box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.5) inset;
-  }
+
 }
