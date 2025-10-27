@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
-import { PresentationControls, OrbitControls, useGLTF } from "@react-three/drei";
+import { PresentationControls, OrbitControls, useGLTF, Backdrop } from "@react-three/drei";
 import Shoe from "../assets/Canvas_Sneaker.glb";
 
 export default function ShoeRender(props) {
@@ -25,10 +25,21 @@ export default function ShoeRender(props) {
         meshes[i].visible = extras.Back;
       }
     }
-    return <primitive position={[0, -1, 0]} object={gltf.scene} />;
+    gltf.scene.rotation.set(0, 2*Math.PI/3, .1);
+    function setShadow(meshes) {
+      meshes.forEach( (mesh) => {
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        if(mesh.children.length > 0) {
+          setShadow(mesh.children)
+        }
+      })
+    }
+    setShadow(meshes)
+    return <primitive position={[0, -1, 0]} object={gltf.scene} castShadow />;
   }
   return (
-    <Canvas>
+    <Canvas shadows>
       <OrbitControls
         target={[0, 0, 0]}
         enablePan={false}
@@ -43,13 +54,23 @@ export default function ShoeRender(props) {
       >
         <Model />
       </PresentationControls>
+      <Backdrop
+        scale={[100, 20, 5]}
+        position={[0, -3.5, -10]}
+        floor={10000} // Stretches the floor segment, 0.25 by default
+        segments={200} // Mesh-resolution, 20 by default
+        receiveShadow={true}
+      >
+        <meshPhysicalMaterial roughness={1}  color="white" />
+      </Backdrop>
       <ambientLight intensity={0.2} />
       <spotLight
-        position={[4.5, 2, 4.5]}
+        position={[0.5, 4, 6.5]}
         castShadow
-        intensity={0.4}
-        angle={0.6}
+        intensity={0.8}
+        angle={0.8}
       />
+      <ambientLight intensity={0.2} />
     </Canvas>
   );
 }
