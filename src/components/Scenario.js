@@ -4,40 +4,50 @@ import { PresentationControls, OrbitControls, useGLTF, Backdrop } from "@react-t
 import Shoe from "../assets/Canvas_Sneaker.glb";
 
 export default function ShoeRender(props) {
-  const { colors, extras } = props;
-  function Model() {
-    const gltf = useGLTF(Shoe);
-    const meshes = gltf.scene.children;
-    const materials = gltf.materials;
-    materials.Sole.color = new THREE.Color(colors.Sole);
-    materials.Laces.color = new THREE.Color(colors.Laces);
-    materials.Base.color = new THREE.Color(colors.Base);
-    materials.Detail1.color = new THREE.Color(colors.Detail1);
-    materials.Detail2.color = new THREE.Color(colors.Detail2);
-    for (let i = 0; i < meshes.length; i++) {
-      if (meshes[i].name === "Circle") {
-        meshes[i].visible = extras.Circle;
+  const { colors, extras } = props
+
+  //Iterate through all the meshes and activate shadows
+  function setShadow(meshes) {
+    meshes.forEach((mesh) => {
+      mesh.castShadow = true
+      mesh.receiveShadow = true
+      if (mesh.children.length > 0) {
+        setShadow(mesh.children)
       }
-      if (meshes[i].name === "Front") {
-        meshes[i].visible = extras.Front;
-      }
-      if (meshes[i].name === "Back") {
-        meshes[i].visible = extras.Back;
-      }
-    }
-    gltf.scene.rotation.set(0, 2*Math.PI/3, .1);
-    function setShadow(meshes) {
-      meshes.forEach( (mesh) => {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        if(mesh.children.length > 0) {
-          setShadow(mesh.children)
-        }
-      })
-    }
-    setShadow(meshes)
-    return <primitive position={[0, -1, 0]} object={gltf.scene} castShadow />;
+    })
   }
+
+  //Iterate through all the materials and assign new colors
+  function setColors(materials) {
+    Object.keys(materials).forEach((key) => {
+      if (colors[key]) {
+        materials[key].color = new THREE.Color(colors[key])
+      }
+    })
+  }
+
+  //Iterate through all the meshes and set visibility
+  function setVisibility(meshes) {
+    meshes.forEach((mesh) => {
+      if (extras[mesh.name] !== undefined) {
+        mesh.visible = extras[mesh.name]
+      }
+      if (mesh.children.length > 0) {
+        setVisibility(mesh.children)
+      }
+    })
+  }
+
+  //Load model and set values
+  function Model() {
+    const gltf = useGLTF(Shoe)
+    setColors(gltf.materials)
+    setVisibility(gltf.scene.children)
+    setShadow(gltf.scene.children)
+    gltf.scene.rotation.set(0, 2 * Math.PI / 3, .1)
+    return <primitive position={[0, -1, 0]} object={gltf.scene} castShadow />
+  }
+
   return (
     <Canvas shadows>
       <OrbitControls
@@ -61,7 +71,7 @@ export default function ShoeRender(props) {
         segments={200} // Mesh-resolution, 20 by default
         receiveShadow={true}
       >
-        <meshPhysicalMaterial roughness={1}  color="white" />
+        <meshPhysicalMaterial roughness={1} color="white" />
       </Backdrop>
       <ambientLight intensity={0.2} />
       <spotLight

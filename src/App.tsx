@@ -44,7 +44,6 @@ export default function App() {
 
   const setInitModel = async () => {
     let params = urlControler.prototype.get()
-    console.log(params)
     let initModel = {}
     let badURLModel = true
     //Check if URL has Category and Model values and they exist in ModelList
@@ -66,7 +65,6 @@ export default function App() {
     setModel(initModel)
     //Assume all values are bad if model values are bad
     if (badURLModel) {
-      console.log("Bad URL Model")
       setColors(defaultValues.colors)
       setExtras(defaultValues.extras)
     }
