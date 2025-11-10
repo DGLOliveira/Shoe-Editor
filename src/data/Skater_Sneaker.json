@@ -4,5 +4,54 @@
     "type": "GLTF",
     "version": "2.0",
     "model_sourceFile": "Skater_Sneaker.glb",
-    "format": "GLB"
+    "format": "GLB",
+    "modifiers": {
+        "materials": {
+            "Collar": {
+                "color": "#555555"
+            },
+            "Eyestay":{
+                "color": "#555555"
+            },
+            "Eyelet":{
+                "color": "#E7DCDF"
+            },
+            "Laces":{
+                "color": "#FFFFFF"
+            },
+            "Foxing":{
+                "color": "#555555"
+            },
+            "Interior":{
+                "color": "#FFFFFF"
+            },
+            "Mid":{
+                "color": "#555555"
+            },
+            "Front":{
+                "color": "#555555"
+            },
+            "Tip":{
+                "color": "#555555"
+            },
+            "Tongue":{
+                "color": "#555555"
+            },
+            "Strobel":{
+                "color": "#555555"
+            },
+            "Midsole Top":{
+                "color": "#FFFFFF"
+            },
+            "Midsole Bottom":{
+                "color": "#111111"
+            },
+            "Outsole":{
+                "color": "#FFFFFF"
+            },
+            "Stitches":{
+                "color": "#FFFFFF"
+            }
+        }
+    }
 }
