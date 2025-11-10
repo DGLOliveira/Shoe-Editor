@@ -1,0 +1,8 @@
+{
+    "name": "Skater",
+    "category": "Sneaker",
+    "type": "GLTF",
+    "version": "2.0",
+    "model_sourceFile": "Skater_Sneaker.glb",
+    "format": "GLB"
+}

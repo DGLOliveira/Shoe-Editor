@@ -3,5 +3,10 @@
         "Name": "Canvas",
         "Category": "Sneaker",
         "dataFile": "Canvas_Sneaker.json"
+    },
+    {
+        "Name": "Skater",
+        "Category": "Sneaker",
+        "dataFile": "Skater_Sneaker.json"
     }
 ]
