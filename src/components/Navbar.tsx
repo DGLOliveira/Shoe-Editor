@@ -12,6 +12,12 @@ export default function Navbar(props : {
             <h1>Shoe Editor</h1>
             <div>
                 <h2
+                    onClick={() => handleNav("models")}
+                    className={menu === "models" ? "selectedMenu" : ""}
+                >
+                    Models
+                </h2>
+                <h2
                     onClick={() => handleNav("colors")}
                     className={menu === "colors" ? "selectedMenu" : ""}
                 >

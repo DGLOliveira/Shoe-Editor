@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 export default function Menu(props: 
     {
-        menu: string
+        menu: string,
+        model: { [key: string]: string },
+        setModel: React.Dispatch<React.SetStateAction<{[key: string]: string }>>
+        models: [{ [key: string]: string }]
         colors: {[key: string]: string }
         setColors: React.Dispatch<React.SetStateAction<{[key: string]: string }>>
         extras: {[key: string]: boolean }
@@ -15,7 +18,27 @@ export default function Menu(props:
     },[menu])
 
     return (
-        <>
+        <>  
+            <ul className={menu === "models" ? "expandMenu" : ""}>
+                {props.models.map((item, index) =>
+                        <li
+                            key={index}
+                        >
+                            <input
+                                type="radio"
+                                name="model"
+                                value={item.Name}
+                                defaultChecked={item.Name === props.model.Name}
+                                onChange={(e) =>
+                                    props.setModel({
+                                        ...item
+                                    })
+                                }
+                            />
+                            {item.Name}
+                        </li>
+                )}
+            </ul>
             <ul className={menu === "colors" ? "expandMenu" : ""}>
                 {Object.keys(colors).map((name, index, arr) =>
                         <li key={index}>

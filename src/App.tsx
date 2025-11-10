@@ -10,6 +10,8 @@ export default function App() {
 
   const DEFAULT_MODEL = ModelList[0]
 
+  const models: [{ [key: string]: string }] = Object.keys(ModelList).map((key) => ModelList[key])
+  console.log(models)
   const [menu, setMenu]: [string,
     React.Dispatch<React.SetStateAction<string>>]
     = useState("none")
@@ -17,7 +19,7 @@ export default function App() {
   const [model, setModel]: [{ [key: string]: string },
     React.Dispatch<React.SetStateAction<{ [key: string]: string }>>]
     = useState({})
-
+  console.log(model);
   const [colors, setColors]: [{ [key: string]: string },
     React.Dispatch<React.SetStateAction<{ [key: string]: string }>>]
     = useState({})
@@ -31,13 +33,17 @@ export default function App() {
     const response = await import(`./data/${initModel.dataFile}`).catch(console.error)
     let newColors: { [key: string]: string } = {}
     let newExtras: { [key: string]: boolean } = {}
-    if (response) {
-      Object.keys(response.modifiers.materials).map((key) => {
-        newColors[key] = response.modifiers.materials[key].color
-      })
-      Object.keys(response.modifiers.meshes).map((key) => {
-        newExtras[key] = response.modifiers.meshes[key].visible
-      })
+    if (response && response.modifiers !== undefined) {
+      if (response.modifiers.materials !== undefined) {
+        Object.keys(response.modifiers.materials).map((key) => {
+          newColors[key] = response.modifiers.materials[key].color
+        })
+      }
+      if (response.modifiers.meshes !== undefined) {
+        Object.keys(response.modifiers.meshes).map((key) => {
+          newExtras[key] = response.modifiers.meshes[key].visible
+        })
+      } 
     }
     return { colors: newColors, extras: newExtras }
   }
@@ -103,9 +109,9 @@ export default function App() {
   }, [])
 
   //Runs on model change, only one model currently available so no current need for this
-  /*useEffect(() => {
+  useEffect(() => {
     importData(model)
-  }, [model])*/
+  }, [model])
 
   // Updates URL to new values, pushes to history
   // Note: Timeout prevents flooding history with rapidly changing params inputs
@@ -129,6 +135,9 @@ export default function App() {
       />
       <Menu
         menu={menu}
+        model={model}
+        setModel={setModel}
+        models={models}
         colors={colors}
         setColors={setColors}
         extras={extras}
