@@ -67,6 +67,7 @@ input:hover {
 }
 
 input[type="color"] {
+  min-width: 40px;
   width: 40px;
   height: 20px;
   padding: 0px;
@@ -197,4 +198,35 @@ li {
   width: 100%;
   resize: none;
 
+}
+
+@media screen and (max-width: 600px) {
+  nav{
+    & h1 {
+      font-size: 3.5vw;
+      width: 15vw;
+    }
+
+    & div {
+      & h2 {
+        font-size: 4vw;
+      }
+    }
+  }
+
+  ul {
+    width: 25vw;
+    right: -25vw;
+    & li {
+      font-size: 3.5vw;
+      padding-left: 1vw;
+      padding-right: 1vw;
+      & input[type="color"] {
+        min-width: 4vw;
+        width: 4vw;
+        height: 4vw;
+      }
+    }
+  }
+  
 }
