@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkshoe_editor=self.webpackChunkshoe_editor||[]).push([[777],{777:(e,s,t)=>{e.exports=t.p+"static/media/Skater_Sneaker.1b8cee50ea1c551519e7.glb"}}]);
