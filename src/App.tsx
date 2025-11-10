@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar.tsx";
-import Menu from "./components/Menu.tsx";
-import Scenario from "./components/Scenario.js";
-import urlControler from "./controllers/url.ts";
+import React, { useState, useEffect } from "react"
+import Navbar from "./components/Navbar.tsx"
+import Menu from "./components/Menu.tsx"
+import Scenario from "./components/Scenario.js"
+import urlControler from "./controllers/url.ts"
 import ModelList from "./data/Model_List.json"
 import "./styles.css";
 
@@ -11,7 +11,7 @@ export default function App() {
   const DEFAULT_MODEL = ModelList[0]
 
   const models: [{ [key: string]: string }] = Object.keys(ModelList).map((key) => ModelList[key])
-  console.log(models)
+
   const [menu, setMenu]: [string,
     React.Dispatch<React.SetStateAction<string>>]
     = useState("none")
@@ -19,7 +19,7 @@ export default function App() {
   const [model, setModel]: [{ [key: string]: string },
     React.Dispatch<React.SetStateAction<{ [key: string]: string }>>]
     = useState({})
-  console.log(model);
+
   const [colors, setColors]: [{ [key: string]: string },
     React.Dispatch<React.SetStateAction<{ [key: string]: string }>>]
     = useState({})
@@ -144,6 +144,7 @@ export default function App() {
         setExtras={setExtras}
       />
       {model && colors && extras && <Scenario
+        model={model}
         colors={colors}
         extras={extras}
       />}
