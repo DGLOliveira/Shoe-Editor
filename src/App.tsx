@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Navbar from "./components/Navbar.tsx"
 import Menu from "./components/Menu.tsx"
-import Scenario from "./components/Scenario.js"
+import Scenario from "./components/Scenario.jsx"
 import urlControler from "./controllers/url.ts"
 import ModelList from "./data/Model_List.json"
 import "./styles.css";

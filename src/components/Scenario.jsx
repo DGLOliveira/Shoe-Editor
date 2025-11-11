@@ -1,12 +1,17 @@
 import { useState, useEffect, Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
-import { PresentationControls, OrbitControls, Backdrop } from "@react-three/drei"
+import { PresentationControls, OrbitControls, Backdrop, Billboard, Text } from "@react-three/drei"
 import Model from "./Model.js"
 
-export default function ShoeRender(props) {
+export default function Scenario(props) {
 
   const { model, colors, extras } = props
 
+  const FallbackModel = () => 
+  <Billboard>
+    <Text follow={true} color={"black"}>Loading</Text>
+  </Billboard>;
+  
   const [modelFile, setModelFile] = useState(null)
   async function getModelFile() {
     const modelData = await import(`../data/${model.dataFile}`)
@@ -37,7 +42,7 @@ export default function ShoeRender(props) {
         cursor={true}
         config={{ mass: 1, tension: 100, friction: 26 }}
       >{modelFile &&
-        <Suspense fallback={null}>
+        <Suspense fallback={<FallbackModel />}>
           <Model
             colors={colors}
             extras={extras}
@@ -49,8 +54,8 @@ export default function ShoeRender(props) {
       <Backdrop
         scale={[100, 20, 5]}
         position={[0, -3.5, -10]}
-        floor={10000} // Stretches the floor segment, 0.25 by default
-        segments={200} // Mesh-resolution, 20 by default
+        floor={10000} 
+        segments={200}
         receiveShadow={true}
       >
         <meshPhysicalMaterial roughness={1} color="white" />
