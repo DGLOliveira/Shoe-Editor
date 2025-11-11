@@ -18,7 +18,8 @@ export default class urlController {
         {
         let params = new URLSearchParams(window.location.search)
         //Clear all keys
-        for( const [key, _value] of params) {
+        let keys = [...params.keys()]
+        for( let key of keys) {
             params.delete(key)
         }
         //Create new URL

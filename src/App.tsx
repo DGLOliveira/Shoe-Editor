@@ -29,8 +29,8 @@ export default function App() {
     = useState({})
 
   //Import model data
-  const importData = async (initModel: { [key: string]: string }) => {
-    const response = await import(`./data/${initModel.dataFile}`).catch(console.error)
+  const importData = async (newModel: { [key: string]: string }) => {
+    const response = await import(`./data/${newModel.dataFile}`).catch(console.error)
     let newColors: { [key: string]: string } = {}
     let newExtras: { [key: string]: boolean } = {}
     if (response && response.modifiers !== undefined) {
@@ -47,6 +47,7 @@ export default function App() {
     }
     setColors(newColors)
     setExtras(newExtras)
+    console.log(newColors, newExtras)
     return { colors: newColors, extras: newExtras }
   }
 
@@ -105,12 +106,12 @@ export default function App() {
     }
   }
 
-  //Runs on page load
+  //Runs on page load, imports model data
   useEffect(() => {
     setInitModel()
   }, [])
 
-  //Runs on model change, only one model currently available so no current need for this
+  //Updates model data
   useEffect(() => {
     importData(model)
   }, [model])
