@@ -21,6 +21,8 @@ export default function Menu(props:
         if (menu === "share") setUrl(window.location.href)
     }, [menu])
 
+
+    console.log(Object.keys(colors).length)
     return (
         <>
             <ul className={menu === "models" ? "expandMenu" : ""}>
@@ -59,7 +61,7 @@ export default function Menu(props:
                 )}
             </ul>
             <ul className={menu === "extras" ? "expandMenu" : ""}>
-                {Object.keys(extras).map((name, index, arr) =>
+                {Object.keys(extras).length !== 0 ? Object.keys(extras).map((name, index, arr) =>
                     <li
                         key={index}
                         onClick={() =>
@@ -87,7 +89,7 @@ export default function Menu(props:
                             />
                         </div>
                     </li>
-                )}
+                ) : <li>No extra features available for this model</li>}
             </ul>
             <ul className={menu === "share" ? "expandMenu" : ""}>
                 <li style={{ flexDirection: "column" }}>
