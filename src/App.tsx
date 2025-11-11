@@ -47,7 +47,6 @@ export default function App() {
     }
     setColors(newColors)
     setExtras(newExtras)
-    console.log(newColors, newExtras)
     return { colors: newColors, extras: newExtras }
   }
 

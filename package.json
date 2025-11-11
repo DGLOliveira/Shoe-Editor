@@ -1,4 +1,4 @@
-{  
+{
   "homepage": "https://dgloliveira.github.io/Shoe-Editor/",
   "name": "shoe-editor",
   "version": "1.0.0",
@@ -12,6 +12,7 @@
     "loader-utils": "3.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^5.5.0",
     "react-scripts": "5.0.1",
     "react-three-fiber": "6.0.13",
     "three": "0.151.3",

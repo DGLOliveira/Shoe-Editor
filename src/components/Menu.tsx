@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { MdContentCopy } from "react-icons/md";
+import { MdContentPaste } from "react-icons/md";
 export default function Menu(props:
     {
         menu: string,
@@ -21,6 +23,21 @@ export default function Menu(props:
         if (menu === "share") setUrl(window.location.href)
     }, [menu])
 
+    const [copiedColor, setCopiedColor]: [
+        string,
+        React.Dispatch<React.SetStateAction<string>>
+    ] = useState("")
+    const [canCopy, setCanCopy]: [
+        boolean,
+        React.Dispatch<React.SetStateAction<boolean>>
+    ] = useState(false)
+
+    useEffect(() => {
+        if (copiedColor !== "") {
+            console.log(copiedColor)
+            setCanCopy(true)
+        }
+    }, [copiedColor])
 
     return (
         <>
@@ -28,7 +45,7 @@ export default function Menu(props:
                 {models.map((item, index) =>
                     <li
                         key={index}
-                        onClick={() =>{
+                        onClick={() => {
                             setModel({ ...item })
                         }}
                     >
@@ -37,8 +54,8 @@ export default function Menu(props:
                             type="radio"
                             name="model"
                             checked={item.Name === model.Name}
-                            onChange={(e) =>{
-                                setModel({...item})
+                            onChange={(e) => {
+                                setModel({ ...item })
                             }}
                         />
                     </li>
@@ -46,16 +63,45 @@ export default function Menu(props:
             </ul>
             <ul className={menu === "colors" ? "expandMenu" : ""}>
                 {Object.keys(colors).map((name, index, arr) =>
-                    <li key={index}>
+                    <li key={index}
+                        onClick={() => document.getElementsByName(name)[0].click()}>
                         {name}
-                        <input
-                            type="color"
-                            name={name}
-                            value={colors[arr[index]]}
-                            onChange={(e) =>
-                                setColors({ ...colors, [e.target.name]: e.target.value })
-                            }
-                        />
+                        <div>
+                            <button
+                                arial-label="Copy color"
+                                style={{cursor: "copy"}}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setCopiedColor(colors[arr[index]])
+                                }}
+                            >
+                                <MdContentCopy />
+                            </button>
+                            <button
+                                arial-label="Paste color"
+                                style={{
+                                     backgroundColor: canCopy ? copiedColor : "transparent",
+                                     cursor: canCopy ? "pointer" : "not-allowed"
+                                     }}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setColors({
+                                        ...colors,
+                                        [name]: copiedColor
+                                    })
+                                }}
+                            >
+                                <MdContentPaste />
+                            </button>
+                            <input
+                                type="color"
+                                name={name}
+                                value={colors[arr[index]]}
+                                onChange={(e) =>
+                                    setColors({ ...colors, [e.target.name]: e.target.value })
+                                }
+                            />
+                        </div>
                     </li>
                 )}
             </ul>
