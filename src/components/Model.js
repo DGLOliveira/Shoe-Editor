@@ -39,9 +39,7 @@ export default function Model(props) {
 
     //Load model and set values
     function Model() {
-        console.log(modelFile)
         const gltf = useGLTF(modelFile)
-        console.log(gltf)
         setColors(gltf.materials)
         setVisibility(gltf.scene.children)
         setShadow(gltf.scene.children)

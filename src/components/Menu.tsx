@@ -22,7 +22,6 @@ export default function Menu(props:
     }, [menu])
 
 
-    console.log(Object.keys(colors).length)
     return (
         <>
             <ul className={menu === "models" ? "expandMenu" : ""}>

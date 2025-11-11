@@ -35,7 +35,6 @@ export default function App() {
     let newExtras: { [key: string]: boolean } = {}
     if (response && response.modifiers !== undefined) {
       if (response.modifiers.materials !== undefined) {
-        console.log("response.modifiers.materials", response.modifiers.materials)
         Object.keys(response.modifiers.materials).map((key) => {
           newColors[key] = response.modifiers.materials[key].color
         })

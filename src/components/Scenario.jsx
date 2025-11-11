@@ -15,14 +15,11 @@ export default function Scenario(props) {
   const [modelFile, setModelFile] = useState(null)
   async function getModelFile() {
     const modelData = await import(`../data/${model.dataFile}`)
-    console.log(modelData.default)
     const modelSource = await import(`../assets/${modelData.default.model_sourceFile}`)
-    console.log(modelSource.default)
     setModelFile(modelSource.default)
   }
 
   useEffect(() => {
-    console.log(model)
     if (model.dataFile) {
       getModelFile()
     }
