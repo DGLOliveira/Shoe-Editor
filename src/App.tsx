@@ -30,7 +30,9 @@ export default function App() {
 
   //Import model data
   const importData = async (newModel: { [key: string]: string }) => {
-    const response = await import(`./data/${newModel.dataFile}`).catch(console.error)
+    const response = await import(`./data/${newModel.dataFile}`).catch(
+      (error) => {console.error(error);console.log(newModel)}
+    )
     let newColors: { [key: string]: string } = {}
     let newExtras: { [key: string]: boolean } = {}
     if (response && response.modifiers !== undefined) {
@@ -58,7 +60,6 @@ export default function App() {
     if (params.Category && params.Name) {
       ModelList.map((item) => {
         if (item.Category === params.Category && item.Name === params.Name) {
-          setModel(item)
           initModel = item
           badURLModel = false
         }
@@ -70,7 +71,6 @@ export default function App() {
     }
     //Import model data
     let defaultValues = await importData(initModel)
-    setModel(initModel)
     //Assume all values are bad if model values are bad
     if (badURLModel) {
       setColors(defaultValues.colors)
@@ -103,6 +103,7 @@ export default function App() {
       setExtras(newExtras)
       setColors(newColors)
     }
+    setModel(initModel)
   }
 
   //Runs on page load, imports model data
@@ -112,7 +113,7 @@ export default function App() {
 
   //Updates model data
   useEffect(() => {
-    importData(model)
+    if(model.dataFile) importData(model)
   }, [model])
 
   // Updates URL to new values, pushes to history

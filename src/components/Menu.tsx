@@ -34,7 +34,6 @@ export default function Menu(props:
 
     useEffect(() => {
         if (copiedColor !== "") {
-            console.log(copiedColor)
             setCanCopy(true)
         }
     }, [copiedColor])
