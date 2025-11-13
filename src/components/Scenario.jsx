@@ -7,11 +7,11 @@ export default function Scenario(props) {
 
   const { model, colors, extras } = props
 
-  const FallbackModel = () => 
-  <Billboard>
-    <Text follow={true} color={"black"}>Loading</Text>
-  </Billboard>;
-  
+  const FallbackModel = () =>
+    <Billboard>
+      <Text follow={true} color={"black"}>Loading</Text>
+    </Billboard>;
+
   const [modelFile, setModelFile] = useState(null)
   async function getModelFile() {
     const modelData = await import(`../data/${model.dataFile}`)
@@ -33,25 +33,25 @@ export default function Scenario(props) {
         enableRotate={false}
         enableZoom={true}
         zoomSpeed={0.5}
-      />
-      <PresentationControls
-        enabled={true}
-        cursor={true}
-        config={{ mass: 1, tension: 100, friction: 26 }}
-      >{modelFile &&
+      />{modelFile &&
         <Suspense fallback={<FallbackModel />}>
-          <Model
-            colors={colors}
-            extras={extras}
-            modelFile={modelFile}
-          />
+          <PresentationControls
+            enabled={true}
+            cursor={true}
+            config={{ mass: 1, tension: 100, friction: 26 }}
+          >
+            <Model
+              colors={colors}
+              extras={extras}
+              modelFile={modelFile}
+            />
+          </PresentationControls>
         </Suspense>
-        }
-      </PresentationControls>
+      }
       <Backdrop
         scale={[100, 20, 5]}
         position={[0, -3.5, -10]}
-        floor={10000} 
+        floor={10000}
         segments={200}
         receiveShadow={true}
       >
