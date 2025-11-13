@@ -7,19 +7,34 @@
     "format": "GLB",
     "modifiers": {
         "materials": {
-            "Sole": {
-                "color": "#FFFFFF"
+            "Body": {
+                "color": "#525588"
+            },
+            "Tongue":{
+                "color": "#525588"
             },
             "Laces": {
                 "color": "#FFFFFF"
             },
-            "Base": {
+            "Eyelets": {
+                "color": "#C8CFD4"
+            },
+            "Tip":{
+                "color": "#FFFFFF"
+            },
+            "Back":{
+                "color": "#FFFFFF"
+            },
+            "Circle":{
+                "color": "#FFFFFF"
+            },
+            "Sole": {
+                "color": "#FFFFFF"
+            },
+            "Sole Detail 1": {
                 "color": "#525588"
             },
-            "Detail1": {
-                "color": "#525588"
-            },
-            "Detail2": {
+            "Sole Detail 2": {
                 "color": "#ae1010"
             }
         },
@@ -27,7 +42,7 @@
             "Circle": {
                 "visible": true
             },
-            "Front": {
+            "Tip": {
                 "visible": true
             },
             "Back": {
