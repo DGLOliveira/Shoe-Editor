@@ -57,14 +57,13 @@ export default function Scenario(props) {
       >
         <meshPhysicalMaterial roughness={1} color="white" />
       </Backdrop>
-      <ambientLight intensity={0.2} />
+      <ambientLight intensity={1} />
       <spotLight
         position={[0.5, 4, 6.5]}
         castShadow
-        intensity={0.8}
+        intensity={250}
         angle={0.8}
       />
-      <ambientLight intensity={0.2} />
     </Canvas>
   );
 }
