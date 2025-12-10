@@ -16,7 +16,7 @@ export default function Model(props) {
         })
     }
 
-    //Iterate through all the materials and assign new colors
+    //Iterate through all the materials and assign new Three colors
     function setColors(materials) {
         Object.keys(materials).forEach((key) => {
             if (colors[key]) {
@@ -39,12 +39,31 @@ export default function Model(props) {
 
     //Load model and set values
     function Model() {
-        const gltf = useGLTF(modelFile)
-        setColors(gltf.materials)
-        setVisibility(gltf.scene.children)
-        setShadow(gltf.scene.children)
-        gltf.scene.rotation.set(0, 2 * Math.PI / 3, .1)
-        return <primitive position={[0, -1, 0]} object={gltf.scene} castShadow />
+        const { materials, scene, nodes } = useGLTF(modelFile)
+        setColors(materials)
+        setVisibility(scene.children)
+        setShadow(scene.children)
+        scene.rotation.set(0, 2 * Math.PI / 3, .1)
+        function generateObjects(obj) {
+            if (obj.isObject3D && obj.name !== "Scene") {
+                if (obj.isMesh) {
+                    return <mesh {...obj} key={obj.name}/>
+                } else if (obj.isGroup) {
+                    return <group {...obj} key={obj.name}>
+                        {obj.children.map(objChild=> generateObjects(objChild))}
+                        </group>
+                }
+            } else {
+                return null
+            }
+        }
+        return (
+            <group onClick={(e) => {e.stopPropagation();console.log(e.object.material.name)}} >
+                {scene.children.map(node =>
+                    generateObjects(node)
+                )}
+            </group>
+        )
     }
 
     return <Model />
