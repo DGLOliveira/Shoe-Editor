@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei"
 import Shoe from "../assets/Canvas_Sneaker.glb"
 export default function Model(props) {
 
-    const { colors, extras, modelFile } = props
+    const { colors, extras, modelFile, hover, setHover } = props
 
     //Iterate through all the meshes and activate shadows
     function setShadow(meshes) {
@@ -37,6 +37,14 @@ export default function Model(props) {
         })
     }
 
+    const markHover = (name) => {
+        if(colors[name] !== undefined){
+            setHover(name)
+        }else{
+            setHover(null)
+        }
+    }
+
     //Load model and set values
     function Model() {
         const { materials, scene, nodes } = useGLTF(modelFile)
@@ -58,7 +66,7 @@ export default function Model(props) {
             }
         }
         return (
-            <group onClick={(e) => {e.stopPropagation();console.log(e.object.material.name)}} >
+            <group onClick={(e) => {e.stopPropagation();markHover(e.object.material.name)}} >
                 {scene.children.map(node =>
                     generateObjects(node)
                 )}

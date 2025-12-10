@@ -28,10 +28,14 @@ export default function App() {
     React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>]
     = useState({})
 
+  const [hover, setHover]: [string | null,
+    React.Dispatch<React.SetStateAction<string | null>>]
+    = useState(null)
+
   //Import model data
   const importData = async (newModel: { [key: string]: string }) => {
     const response = await import(`./data/${newModel.dataFile}`).catch(
-      (error) => {console.error(error);console.log(newModel)}
+      (error) => { console.error(error); console.log(newModel) }
     )
     let newColors: { [key: string]: string } = {}
     let newExtras: { [key: string]: boolean } = {}
@@ -45,7 +49,7 @@ export default function App() {
         Object.keys(response.modifiers.meshes).map((key) => {
           newExtras[key] = response.modifiers.meshes[key].visible
         })
-      } 
+      }
     }
     setColors(newColors)
     setExtras(newExtras)
@@ -113,7 +117,7 @@ export default function App() {
 
   //Updates model data
   useEffect(() => {
-    if(model.dataFile) importData(model)
+    if (model.dataFile) importData(model)
   }, [model])
 
   // Updates URL to new values, pushes to history
@@ -135,6 +139,7 @@ export default function App() {
       <Navbar
         menu={menu}
         setMenu={setMenu}
+        setHover={setHover}
       />
       <Menu
         menu={menu}
@@ -145,11 +150,15 @@ export default function App() {
         setColors={setColors}
         extras={extras}
         setExtras={setExtras}
+        hover={hover}
+        setHover={setHover}
       />
       {model && colors && extras && <Scenario
         model={model}
         colors={colors}
         extras={extras}
+        hover={hover}
+        setHover={setHover}
       />}
     </>
   );

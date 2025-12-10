@@ -5,7 +5,7 @@ import Model from "./Model.js"
 
 export default function Scenario(props) {
 
-  const { model, colors, extras } = props
+  const { model, colors, extras, hover, setHover } = props
 
   const FallbackModel = () =>
     <Billboard>
@@ -44,6 +44,8 @@ export default function Scenario(props) {
               colors={colors}
               extras={extras}
               modelFile={modelFile}
+              hover={hover}
+              setHover={setHover}
             />
           </PresentationControls>
         </Suspense>
@@ -54,6 +56,7 @@ export default function Scenario(props) {
         floor={10000}
         segments={200}
         receiveShadow={true}
+        onClick={()=>setHover(null)}
       >
         <meshPhysicalMaterial roughness={1} color="white" />
       </Backdrop>

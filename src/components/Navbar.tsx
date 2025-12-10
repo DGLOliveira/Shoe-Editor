@@ -1,14 +1,15 @@
 export default function Navbar(props : {
     menu: string
     setMenu: React.Dispatch<React.SetStateAction<string>>
+    setHover: React.Dispatch<React.SetStateAction<string | null>>
 }) {
-    const { menu, setMenu } = props
+    const { menu, setMenu, setHover } = props
     const handleNav = (value : string) => {
         if (menu === value) setMenu("none")
         else setMenu(value)
     }
     return (
-        <nav>
+        <nav onClick={()=>setHover(null)}>
             <h1>Shoe Editor</h1>
             <div>
                 <h2
