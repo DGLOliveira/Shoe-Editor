@@ -1,6 +1,7 @@
 import { useState, useEffect, Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { PresentationControls, OrbitControls, Backdrop, Billboard, Text } from "@react-three/drei"
+import { Selection, EffectComposer, Outline } from '@react-three/postprocessing'
 import Model from "./Model.js"
 
 export default function Scenario(props) {
@@ -35,19 +36,24 @@ export default function Scenario(props) {
         zoomSpeed={0.5}
       />{modelFile &&
         <Suspense fallback={<FallbackModel />}>
-          <PresentationControls
-            enabled={true}
-            cursor={true}
-            config={{ mass: 1, tension: 100, friction: 26 }}
-          >
-            <Model
-              colors={colors}
-              extras={extras}
-              modelFile={modelFile}
-              hover={hover}
-              setHover={setHover}
-            />
-          </PresentationControls>
+          <Selection>
+            <EffectComposer multisampling={8} autoClear={false}>
+              <Outline blur visibleEdgeColor="white" hiddenEdgeColor="gray" edgeStrength={100} width={1000} />
+            </EffectComposer>
+            <PresentationControls
+              enabled={true}
+              cursor={true}
+              config={{ mass: 1, tension: 100, friction: 26 }}
+            >
+              <Model
+                colors={colors}
+                extras={extras}
+                modelFile={modelFile}
+                hover={hover}
+                setHover={setHover}
+              />
+            </PresentationControls>
+          </Selection>
         </Suspense>
       }
       <Backdrop
@@ -56,7 +62,7 @@ export default function Scenario(props) {
         floor={10000}
         segments={200}
         receiveShadow={true}
-        onClick={()=>setHover(null)}
+        onClick={() => setHover(null)}
       >
         <meshPhysicalMaterial roughness={1} color="white" />
       </Backdrop>

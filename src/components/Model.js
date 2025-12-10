@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { useGLTF } from "@react-three/drei"
-import Shoe from "../assets/Canvas_Sneaker.glb"
+import { Select } from "@react-three/postprocessing"
 export default function Model(props) {
 
     const { colors, extras, modelFile, hover, setHover } = props
@@ -38,9 +38,9 @@ export default function Model(props) {
     }
 
     const markHover = (name) => {
-        if(colors[name] !== undefined){
+        if (colors[name] !== undefined) {
             setHover(name)
-        }else{
+        } else {
             setHover(null)
         }
     }
@@ -55,18 +55,20 @@ export default function Model(props) {
         function generateObjects(obj) {
             if (obj.isObject3D && obj.name !== "Scene") {
                 if (obj.isMesh) {
-                    return <mesh {...obj} key={obj.name}/>
+                    return <Select enabled={hover === obj.material.name} key={obj.name}>
+                        <mesh {...obj} />
+                    </Select>
                 } else if (obj.isGroup) {
                     return <group {...obj} key={obj.name}>
-                        {obj.children.map(objChild=> generateObjects(objChild))}
-                        </group>
+                        {obj.children.map(objChild => generateObjects(objChild))}
+                    </group>
                 }
             } else {
                 return null
             }
         }
         return (
-            <group onClick={(e) => {e.stopPropagation();markHover(e.object.material.name)}} >
+            <group onClick={(e) => { e.stopPropagation(); markHover(e.object.material.name) }} >
                 {scene.children.map(node =>
                     generateObjects(node)
                 )}
