@@ -38,7 +38,7 @@ export default function Scenario(props) {
         <Suspense fallback={<FallbackModel />}>
           <Selection>
             <EffectComposer multisampling={8} autoClear={false}>
-              <Outline blur visibleEdgeColor="white" hiddenEdgeColor="gray" edgeStrength={100} width={1000} />
+              <Outline blur visibleEdgeColor="white" hiddenEdgeColor="white" edgeStrength={100} width={1000} />
             </EffectComposer>
             <PresentationControls
               enabled={true}

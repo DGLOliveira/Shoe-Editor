@@ -66,7 +66,7 @@ export default function Menu(props:
                 {Object.keys(colors).map((name, index, arr) =>
                     <li key={index}
                         onClick={() => document.getElementsByName(name)[0].click()}
-                        onMouseOver={() => setHover(name)}
+                        onMouseOver={() => hover !== name && setHover(name)}
                         style={{background: hover === name ? "lightskyblue" : "white"}}
                         >
                         {name}
@@ -119,6 +119,8 @@ export default function Menu(props:
                                 [arr[index]]: !extras[arr[index]]
                             })
                         }
+                        onMouseOver={() => hover !== name && setHover(name)}
+                        style={{background: hover === name ? "lightskyblue" : "white"}}
                     >
                         {name}
                         <div
