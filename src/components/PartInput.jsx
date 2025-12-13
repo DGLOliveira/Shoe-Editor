@@ -12,6 +12,7 @@ export default function partInput(props) {
     const [lightness, setLightness] = useState(50);
     const [saturation, setSaturation] = useState(100);
 
+    //Converts hex to RGB
     const hexToRgb = (hex) => {
         var result;
         if (hex.length === 4) {
@@ -28,45 +29,89 @@ export default function partInput(props) {
             : null;
     }
 
+    //Converts RGB to HSL
     const rgbToHsl = (rgb) => {
-    let r = rgb[0],
-        g = rgb[1],
-        b = rgb[2];
-    r /= 255;
-    g /= 255;
-    b /= 255;
-    let cmin = Math.min(r, g, b),
-        cmax = Math.max(r, g, b),
-        delta = cmax - cmin,
-        h = 0,
-        s = 0,
-        l = ((cmax + cmin) / 2);
-    if (delta === 0) {
-        s = 0;
-        h = 0;
-    }else {
-        if (l <= 0.5) {
-            s = delta / (cmax + cmin);
+        let r = rgb[0],
+            g = rgb[1],
+            b = rgb[2];
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        let cmin = Math.min(r, g, b),
+            cmax = Math.max(r, g, b),
+            delta = cmax - cmin,
+            h = 0,
+            s = 0,
+            l = ((cmax + cmin) / 2);
+        if (delta === 0) {
+            s = 0;
+            h = 0;
         } else {
-            s = delta / (2 - cmax-cmin);
-        };
-        if (cmax === r) {
-            h = (g - b) / delta;
-        } else if (cmax === g) {
-            h = ((b - r) / delta) + 2;
-        } else if(cmax === b) {
-            h = ((r - g) / delta) + 4;
+            if (l <= 0.5) {
+                s = delta / (cmax + cmin);
+            } else {
+                s = delta / (2 - cmax - cmin);
+            };
+            if (cmax === r) {
+                h = (g - b) / delta;
+            } else if (cmax === g) {
+                h = ((b - r) / delta) + 2;
+            } else if (cmax === b) {
+                h = ((r - g) / delta) + 4;
+            }
         }
+        h = Math.round(h * 60);
+        if (h < 0) {
+            h += 360;
+        }
+        s = Math.abs(s * 100).toFixed(0);
+        l = (l * 100).toFixed(0);
+        let hsl = [h, s + '%', l + '%'];
+        return hsl;
     }
-    h = Math.round(h * 60);
-    if (h < 0) {
-        h += 360;
-    }
-    s = Math.abs(s * 100).toFixed(0);
-    l = (l * 100 ).toFixed(0);
-    let hsl = [h, s + '%', l + '%'];
-    return hsl;
-}
+
+    //Updates hue, saturation and luminance when mouse hovers over a different part of the shoe
+    useEffect(() => {
+        if (hover) {
+            let color = colors[hover];
+            let hslColor = [];
+            if (color[0] === "#") {
+                hslColor = rgbToHsl(hexToRgb(color));
+            } else if (color.slice(0, 3) === "rgb") {
+                hslColor = rgbToHsl(color);
+            } else if (color.slice(0, 3) === "hsl") {
+                for (let i = 0; i < color.length; i++) {
+                    var start;
+                    var end;
+                    if (color[i] === "(") {
+                        start = i + 1;
+                    } else if (color[i] === ")") {
+                        end = i;
+                        hslColor.push(color.slice(start, end));
+                    } else if (color[i] === ",") {
+                        hslColor.push(color.slice(start, i));
+                        start = i + 1;
+                    }
+                }
+            } else {
+                //No named colors are going to be used
+                //hslColor = nameToHsl(color);
+            }
+            setHue(Number(hslColor[0]));
+            setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
+            setLightness(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
+            if (isOpen) {
+                const hueLumRect = hueLumRef.current.getBoundingClientRect();
+                setColorSelectorPos({
+                    x: hslColor[0] / 360 * hueLumRect.width,
+                    y: (100 - hslColor[2].slice(0, hslColor[2].length - 1)) / 100 * hueLumRect.height
+                });
+                const saturationRect = saturationRef.current.getBoundingClientRect();
+                setSaturationSliderPos(((100 - hslColor[1].slice(0, hslColor[1].length - 1)) / 100) * saturationRect.height);
+            }
+
+        }
+    }, [hover])
 
     const drawColorMap = (ctx) => {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -143,6 +188,11 @@ export default function partInput(props) {
         }
 
     }, [isOpen, saturation]);
+
+    //Updates colors object when hue, saturation, or lightness changes
+    useEffect(() => {
+        setColors({...colors, [hover]: `hsl(${hue},${saturation}%,${lightness}%)`})
+    },[hue, saturation, lightness])
 
     return (
         <div id="partInput">
