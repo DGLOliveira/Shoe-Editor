@@ -52,8 +52,6 @@ export default function App() {
         })
       }
     }
-    setColors(newColors)
-    setExtras(newExtras)
     return { colors: newColors, extras: newExtras }
   }
 
@@ -78,6 +76,7 @@ export default function App() {
     let defaultValues = await importData(initModel)
     //Assume all values are bad if model values are bad
     if (badURLModel) {
+      console.log("Bad URL model values, using default values")
       setColors(defaultValues.colors)
       setExtras(defaultValues.extras)
     }
@@ -101,6 +100,7 @@ export default function App() {
           if (/^#[0-9A-F]{6}$/i.test(params[key])) {
             newColors[key] = params[key]
           } else {
+            console.log(`Invalid color value for ${key}: ${params[key]}`)
             newColors[key] = defaultValues.colors[key]
           }
         }
@@ -117,8 +117,17 @@ export default function App() {
   }, [])
 
   //Updates model data
+  async function changeModel(model: { [key: string]: string }){
+      const defaultValues = await importData(model)
+      setColors(defaultValues.colors)
+      setExtras(defaultValues.extras)
+  }
+
   useEffect(() => {
-    if (model.dataFile) importData(model)
+    //Prevents reloading same model data
+    if (model.dataFile && model.Name !== urlControler.prototype.get().Name) {
+      changeModel(model)
+    }
   }, [model])
 
   // Updates URL to new values, pushes to history
