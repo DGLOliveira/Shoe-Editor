@@ -4,6 +4,7 @@ import Menu from "./components/Menu.tsx"
 import Scenario from "./components/Scenario.jsx"
 import urlControler from "./controllers/url.ts"
 import ModelList from "./data/Model_List.json"
+import PartInput from "./components/PartInput.jsx"
 import "./styles.css";
 
 export default function App() {
@@ -160,6 +161,11 @@ export default function App() {
         hover={hover}
         setHover={setHover}
       />}
+      <PartInput
+        hover={hover}
+        colors={colors}
+        setColors={setColors}
+      />
     </>
   );
 }
