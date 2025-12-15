@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 export default function partInput(props) {
-    const { hover, setHover, colors, setColors } = props
+    const { hover, setHover, colors, setColors, copiedColor, setCopiedColor, canCopy } = props
     const [isOpen, setIsOpen] = useState(false)
     const hueLumRef = useRef(null)
     const saturationRef = useRef(null);
@@ -263,6 +263,7 @@ export default function partInput(props) {
         }
     };
 
+    //Updates color values based on HSL input
     const handleHSLInput = (target, value) => {
         console.log(value, target);
         let newHSL = hsl;
@@ -272,6 +273,7 @@ export default function partInput(props) {
         updateAllColors("hsl", newHSL);
     }
 
+    //Updates color values based on RGB input
     const handleRGBInput = (target, value) => {
         console.log(value, target);
         let newRGB = rgb;
@@ -281,6 +283,7 @@ export default function partInput(props) {
         updateAllColors("rgb", newRGB);
     }
 
+    //Validates hex color and updates color values if valid
     const handleHEXInput = () => {
         let newHex = "";
         if (hexInput.match(/^#([A-Fa-f0-9]{6})$/)) {
@@ -448,8 +451,8 @@ export default function partInput(props) {
                 }
             </div>
             <div className="partButtons">
-                <button>Copy</button>
-                <button>Paste</button>
+                <button onClick={()=> setCopiedColor(hex)}>Copy</button>
+                <button enabled={canCopy} style={{background: copiedColor !== "" ? copiedColor : "lightgray"}} onClick={()=> updateAllColors("hex", copiedColor)}>Paste</button>
             </div>
         </div>
     )

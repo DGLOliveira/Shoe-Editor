@@ -33,6 +33,21 @@ export default function App() {
     React.Dispatch<React.SetStateAction<string | null>>]
     = useState(null)
 
+  const [copiedColor, setCopiedColor]: [
+    string,
+    React.Dispatch<React.SetStateAction<string>>
+  ] = useState("")
+  const [canCopy, setCanCopy]: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ] = useState(false)
+
+  useEffect(() => {
+    if (copiedColor !== "") {
+      setCanCopy(true)
+    }
+  }, [copiedColor])
+
   //Import model data
   const importData = async (newModel: { [key: string]: string }) => {
     const response = await import(`./data/${newModel.dataFile}`).catch(
@@ -117,10 +132,10 @@ export default function App() {
   }, [])
 
   //Updates model data
-  async function changeModel(model: { [key: string]: string }){
-      const defaultValues = await importData(model)
-      setColors(defaultValues.colors)
-      setExtras(defaultValues.extras)
+  async function changeModel(model: { [key: string]: string }) {
+    const defaultValues = await importData(model)
+    setColors(defaultValues.colors)
+    setExtras(defaultValues.extras)
   }
 
   useEffect(() => {
@@ -162,6 +177,9 @@ export default function App() {
         setExtras={setExtras}
         hover={hover}
         setHover={setHover}
+        copiedColor={copiedColor}
+        setCopiedColor={setCopiedColor}
+        canCopy={canCopy}
       />
       {model && colors && extras && <Scenario
         model={model}
@@ -175,6 +193,9 @@ export default function App() {
         setHover={setHover}
         colors={colors}
         setColors={setColors}
+        copiedColor={copiedColor}
+        setCopiedColor={setCopiedColor}
+        canCopy={canCopy}
       />
     </>
   );

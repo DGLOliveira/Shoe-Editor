@@ -13,9 +13,12 @@ export default function Menu(props:
         setExtras: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
         hover: string | null
         setHover: React.Dispatch<React.SetStateAction<string | null>>
+        copiedColor: string
+        setCopiedColor: React.Dispatch<React.SetStateAction<string>>
+        canCopy: boolean
     }
 ) {
-    const { menu, model, setModel, models, colors, setColors, extras, setExtras, hover, setHover } = props
+    const { menu, model, setModel, models, colors, setColors, extras, setExtras, hover, setHover, copiedColor, setCopiedColor, canCopy } = props
 
     const [url, setUrl]:
         [string, React.Dispatch<React.SetStateAction<string>>]
@@ -25,20 +28,6 @@ export default function Menu(props:
         if (menu === "share") setUrl(window.location.href)
     }, [menu])
 
-    const [copiedColor, setCopiedColor]: [
-        string,
-        React.Dispatch<React.SetStateAction<string>>
-    ] = useState("")
-    const [canCopy, setCanCopy]: [
-        boolean,
-        React.Dispatch<React.SetStateAction<boolean>>
-    ] = useState(false)
-
-    useEffect(() => {
-        if (copiedColor !== "") {
-            setCanCopy(true)
-        }
-    }, [copiedColor])
 
     return (
         <>
