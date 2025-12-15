@@ -43,6 +43,7 @@ export default function Scenario(props) {
             <PresentationControls
               enabled={true}
               cursor={true}
+              global={true}
               config={{ mass: 1, tension: 100, friction: 26 }}
             >
               <Model
@@ -62,7 +63,6 @@ export default function Scenario(props) {
         floor={10000}
         segments={200}
         receiveShadow={true}
-        onClick={() => setHover(null)}
       >
         <meshPhysicalMaterial roughness={1} color="white" />
       </Backdrop>
