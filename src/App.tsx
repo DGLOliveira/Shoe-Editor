@@ -172,6 +172,7 @@ export default function App() {
       />}
       <PartInput
         hover={hover}
+        setHover={setHover}
         colors={colors}
         setColors={setColors}
       />

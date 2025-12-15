@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 export default function partInput(props) {
-    const { hover, colors, setColors } = props
+    const { hover, setHover, colors, setColors } = props
     const [isOpen, setIsOpen] = useState(false)
     const hueLumRef = useRef(null)
     const saturationRef = useRef(null);
@@ -29,6 +29,7 @@ export default function partInput(props) {
             : null;
     }
 
+    //Converts RGB to hex
     const rgbToHex = (rgb) => {
         return "#" + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)
     };
@@ -74,6 +75,7 @@ export default function partInput(props) {
         return hsl;
     }
 
+    //Converts HSL to RGB
     const hslToRgb =(hsl) => {
         let h = hsl[0],
             s = hsl[1] / 100,
@@ -159,6 +161,7 @@ export default function partInput(props) {
         }
     }, [hover])
 
+    //Genetates a hue and luminance 2D color pixel map for canvas
     const drawColorMap = (ctx) => {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         let blockwidth = ctx.canvas.width / 360;
@@ -184,6 +187,7 @@ export default function partInput(props) {
             }
         }
     };
+    //Updates hue and luminance map slider position on touch, as well as their respective values
     const touchHueLumMap = (event) => {
         if (event.touches.length === 1) {
             const rect = hueLumRef.current.getBoundingClientRect();
@@ -209,6 +213,7 @@ export default function partInput(props) {
             }
         }
     };
+    //Updates saturation slider position on touch, as well as its value
     const touchSaturationSlider = (event) => {
         if (event.touches.length === 1) {
             const rect = saturationRef.current.getBoundingClientRect();
@@ -221,6 +226,21 @@ export default function partInput(props) {
         }
     };
 
+    //Changes which part is being edited using the arrow buttons in this component
+    const changePart = (direction) =>{
+        if(hover === null){ 
+            setHover(Object.keys(colors)[0]);
+        }else{
+        let partArray = Object.keys(colors);
+        if(direction === 1){
+            let index = partArray.indexOf(hover);
+            if(index === partArray.length - 1 && direction === 1) index = 0;
+            else if(index === 0 && direction === -1) index = partArray.length - 1
+            else index++;
+            setHover(partArray[index]);
+        }
+        }
+    }
 
     useEffect(() => {
         if (hover !== null) setIsOpen(true)
@@ -244,9 +264,9 @@ export default function partInput(props) {
     return (
         <div id="partInput">
             <div id="partName">
-                <button>◄</button>
+                <button onClick={()=>changePart(-1)}>◄</button>
                 {hover}
-                <button>►</button>
+                <button onClick={()=>changePart(1)}>►</button>
             </div>
             <div id="partEditor">
                 <hue-light-map>
