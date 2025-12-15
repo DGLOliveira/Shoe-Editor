@@ -11,6 +11,8 @@ export default function partInput(props) {
     const [hsl, setHSL] = useState([0, 50, 100]);
     const [rgb, setRGB] = useState([0, 0, 0]);
     const [hex, setHex] = useState("#000000");
+    const [hexInput, setHexInput] = useState("#000000");
+    const [invalidHex, setInvalidHex] = useState(false);
     const [selectedInputs, setSelectedInputs] = useState("HSL");
 
     //Converts hex string to RGB array
@@ -279,6 +281,29 @@ export default function partInput(props) {
         updateAllColors("rgb", newRGB);
     }
 
+    const handleHEXInput = () => {
+        let newHex = "";
+        if (hexInput.match(/^#([A-Fa-f0-9]{6})$/)) {
+            newHex = hexInput
+            updateAllColors("hex", newHex);
+        }
+        else if (hexInput.match(/^#([A-Fa-f0-9]{3})$/)) {
+            newHex = `#${hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2] + hexInput[3] + hexInput[3]}`
+            updateAllColors("hex", newHex);
+        } else if (hexInput.match(/^([A-Fa-f0-9]{6})$/)) {
+            newHex = `#${hexInput[0] + hexInput[0] + hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2]}`
+            updateAllColors("hex", newHex);
+        } else if (hexInput.match(/^([A-Fa-f0-9]{3})$/)) {
+            newHex = `#${hexInput[0] + hexInput[0] + hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2]}`
+            updateAllColors("hex", newHex);
+        }
+        if(newHex ===""){
+            setInvalidHex(true);
+        }else{
+            setInvalidHex(false);
+        }
+    }
+
     //Changes which part is being edited using the arrow buttons in this component
     const changePart = (direction) => {
         if (hover === null) {
@@ -310,6 +335,10 @@ export default function partInput(props) {
         }
 
     }, [isOpen, hex]);
+
+    useEffect(() => {
+        setHexInput(hex);
+    }, [selectedInputs, hex])
 
     return (
         <div id="partInput">
@@ -368,11 +397,12 @@ export default function partInput(props) {
                 </saturation-slider>
             </div>
             <div className="partButtons">
+                <button className={selectedInputs === "HEX" ? "active" : ""} onClick={() => setSelectedInputs("HEX")}>HEX</button>
                 <button className={selectedInputs === "HSL" ? "active" : ""} onClick={() => setSelectedInputs("HSL")}>HSL</button>
                 <button className={selectedInputs === "RGB" ? "active" : ""} onClick={() => setSelectedInputs("RGB")}>RGB</button>
             </div>
             <div id="partValues">
-                {selectedInputs === "HSL" ?
+                {selectedInputs === "HSL" &&
                     <>
                         <div>
                             <label htmlFor="hue">Hue</label>
@@ -386,11 +416,12 @@ export default function partInput(props) {
                             <label htmlFor="luminosity">Luminosity</label>
                             <input type="number" id="luminosity" value={hsl[2]} min="0" max="100" onChange={(e) => handleHSLInput("l", e.target.value)} />
                         </div>
-                    </> :
+                    </>}
+                {selectedInputs === "RGB" &&
                     <>
                         <div>
                             <label htmlFor="red">Red</label>
-                            <input type="number" id="red" value={rgb[0]} min="0" max="255" onChange={(e) => handleRGBInput("r", e.target.value)}/>
+                            <input type="number" id="red" value={rgb[0]} min="0" max="255" onChange={(e) => handleRGBInput("r", e.target.value)} />
                         </div>
                         <div>
                             <label htmlFor="green">Green</label>
@@ -399,6 +430,19 @@ export default function partInput(props) {
                         <div>
                             <label htmlFor="blue">Blue</label>
                             <input type="number" id="blue" value={rgb[2]} min="0" max="255" onChange={(e) => handleRGBInput("b", e.target.value)} />
+                        </div>
+                    </>
+                }{
+                    selectedInputs === "HEX" &&
+                    <>
+                        <div style={{justifyContent: "center"}}>
+                            <input type="text" id="hex" pattern="#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?" value={hexInput} onChange={(e) => setHexInput(e.target.value)} />
+                        </div>
+                        <div style={{justifyContent: "center"}}>
+                            <button onClick={() => handleHEXInput()}>Confirm</button>
+                        </div>
+                        <div style={{justifyContent: "center", color: "red"}}>
+                            {invalidHex && "Invalid Value!"}
                         </div>
                     </>
                 }
