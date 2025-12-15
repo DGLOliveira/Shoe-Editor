@@ -236,7 +236,7 @@ li {
   bottom: 0;
   left: 0;
   width: 230px;
-  height: 290px;
+  height: 340px;
   background: white;
   border-top: 1px solid gray;
   border-right: 1px solid gray;
@@ -283,6 +283,58 @@ li {
   align-items: center;
   margin: 5px;
   box-sizing: border-box;
+}
+
+.partButtons{
+  width:100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:stretch;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left:15px;
+  padding-right: 15px;
+}
+
+.partButtons>button{
+  width: 50%;
+  box-sizing: border-box;
+  border-bottom: 3px outset gray;
+  border-top:  3px outset gray;
+  background: lightgray;
+  cursor: pointer;
+}
+
+.partButtons>button:hover{
+  background: lightblue;
+}
+
+.partButtons>button:active{
+  background: lightskyblue;
+}
+
+.partButtons>button.active{
+  border-bottom:  3px inset gray;
+  border-top:  3px inset gray;
+  background: lightskyblue;
+}
+
+.partButtons>button:first-child{
+  border-radius: 12px 0 0 12px;
+  border-left:  3px outset gray;
+}
+
+.partButtons>button:first-child.active{ 
+  border-left:  3px inset gray;
+}
+
+.partButtons>button:last-child{
+  border-radius: 0 12px 12px 0;
+  border-right:  3px outset gray;
+}
+
+.partButtons>button:last-child.active{
+  border-right:  3px inset gray;
 }
 
 slider-thumb {
