@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react"
 export default function partInput(props) {
     const { hover, setHover, colors, setColors, copiedColor, setCopiedColor, canCopy } = props
-    const [isOpen, setIsOpen] = useState(false)
     const hueLumRef = useRef(null)
     const saturationRef = useRef(null);
     const [colorSelectorPos, setColorSelectorPos] = useState({ x: 0, y: 0 });
@@ -143,9 +142,6 @@ export default function partInput(props) {
                 newHex = rgbToHex(value);
                 break;
         }
-        console.log("Hex: ", newHex);
-        console.log("HSL: ", newHSL);
-        console.log("RGB: ", newRGB);
         setHex(newHex);
         setHSL(newHSL);
         setRGB(newRGB);
@@ -180,10 +176,6 @@ export default function partInput(props) {
             setHex(hexColor);
             setRGB([Number(rgbColor[0]), Number(rgbColor[1]), Number(rgbColor[2])]);
             setHSL([Number(hslColor[0]), Number(hslColor[1]), Number(hslColor[2])]);
-            console.log("Hex: ", hexColor);
-            console.log("HSL: ", [Number(hslColor[0]), Number(hslColor[1]), Number(hslColor[2])]);
-            console.log("RGB: ", [Number(rgbColor[0]), Number(rgbColor[1]), Number(rgbColor[2])]);
-            if (isOpen) {
                 const hueLumRect = hueLumRef.current.getBoundingClientRect();
                 setColorSelectorPos({
                     x: hslColor[0] / 360 * hueLumRect.width,
@@ -191,7 +183,6 @@ export default function partInput(props) {
                 });
                 const saturationRect = saturationRef.current.getBoundingClientRect();
                 setSaturationSliderPos(((100 - hslColor[1]) / 100) * saturationRect.height);
-            }
 
         }
     }, [hover])
@@ -265,7 +256,6 @@ export default function partInput(props) {
 
     //Updates color values based on HSL input
     const handleHSLInput = (target, value) => {
-        console.log(value, target);
         let newHSL = hsl;
         if (target === "h") newHSL[0] = Number(value);
         if (target === "s") newHSL[1] = Number(value);
@@ -275,7 +265,6 @@ export default function partInput(props) {
 
     //Updates color values based on RGB input
     const handleRGBInput = (target, value) => {
-        console.log(value, target);
         let newRGB = rgb;
         if (target === "r") newRGB[0] = Number(value);
         if (target === "g") newRGB[1] = Number(value);
@@ -321,11 +310,6 @@ export default function partInput(props) {
         }
     }
 
-    useEffect(() => {
-        if (hover !== null) setIsOpen(true)
-        else setIsOpen(false)
-    }, [hover])
-
     //Updates color map, saturation map and repective slider positions
     useEffect(() => {
         if (hueLumRef.current && saturationRef.current) {
@@ -337,7 +321,7 @@ export default function partInput(props) {
             setSaturationSliderPos(((100 - hsl[1]) / 100) * vert.height);
         }
 
-    }, [isOpen, hex]);
+    }, [hover, hex]);
 
     useEffect(() => {
         setHexInput(hex);
