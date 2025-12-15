@@ -9,7 +9,7 @@ export default function partInput(props) {
     const [colorSelectorPos, setColorSelectorPos] = useState({ x: 0, y: 0 });
     const [saturationSliderPos, setSaturationSliderPos] = useState(0);
     const [hue, setHue] = useState(0);
-    const [lightness, setLightness] = useState(50);
+    const [luminosity, setLuminosity] = useState(50);
     const [saturation, setSaturation] = useState(100);
 
     //Converts hex to RGB
@@ -147,7 +147,7 @@ export default function partInput(props) {
             }
             setHue(Number(hslColor[0]));
             setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
-            setLightness(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
+            setLuminosity(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
             if (isOpen) {
                 const hueLumRect = hueLumRef.current.getBoundingClientRect();
                 setColorSelectorPos({
@@ -183,7 +183,7 @@ export default function partInput(props) {
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
                 setColorSelectorPos({ x, y });
                 setHue(Math.floor(360 * x / rect.width));
-                setLightness(100 - Math.floor(100 * y / rect.height));
+                setLuminosity(100 - Math.floor(100 * y / rect.height));
             }
         }
     };
@@ -196,7 +196,7 @@ export default function partInput(props) {
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
                 setColorSelectorPos({ x, y });
                 setHue(Math.floor(360 * x / rect.width));
-                setLightness(100 - Math.floor(100 * y / rect.height));
+                setLuminosity(100 - Math.floor(100 * y / rect.height));
             }
         }
     };
@@ -226,6 +226,27 @@ export default function partInput(props) {
         }
     };
 
+    //Updates hue value and color map slider position
+    const handleHueInput = (value) => {
+        setHue(value);
+        const rect = hueLumRef.current.getBoundingClientRect();
+        setColorSelectorPos({ ...colorSelectorPos, x: value / 360 * rect.width });
+    };
+
+    //Updates luminance value and color map slider position
+    const handleLumInput = (value) => {
+        setLuminosity(value);
+        const rect = hueLumRef.current.getBoundingClientRect();
+        setColorSelectorPos({ ...colorSelectorPos, y: (100 - value) / 100 * rect.height });
+    };
+
+    //Updates saturation value, saturation slider position
+    const handleSaturationInput = (value) => {
+        setSaturation(value);
+        const rect = saturationRef.current.getBoundingClientRect();
+        setSaturationSliderPos(((100 - value) / 100) * rect.height);
+    };
+
     //Changes which part is being edited using the arrow buttons in this component
     const changePart = (direction) => {
         if (hover === null) {
@@ -253,17 +274,17 @@ export default function partInput(props) {
 
     }, [isOpen, saturation]);
 
-    //Updates colors object when hue, saturation, or lightness changes
+    //Updates colors object when hue, saturation, or luminosity changes
     useEffect(() => {
         //Colors are formatted back to hex string in order to keep url short
-        setColors({ ...colors, [hover]: rgbToHex(hslToRgb([hue, saturation, lightness])) })
-    }, [hue, saturation, lightness])
+        setColors({ ...colors, [hover]: rgbToHex(hslToRgb([hue, saturation, luminosity])) })
+    }, [hue, saturation, luminosity])
 
     return (
         <div id="partInput">
             <div id="partName">
                 <button onClick={() => changePart(-1)}>◄</button>
-                {hover}
+                {hover !== null ? hover : "Select a part"}
                 <button onClick={() => changePart(1)}>►</button>
             </div>
             <div id="partEditor">
@@ -280,7 +301,7 @@ export default function partInput(props) {
                         style={{
                             top: colorSelectorPos.y,
                             left: colorSelectorPos.x,
-                            background: `hsl(${hue},${saturation}%,${lightness}%)`
+                            background: `hsl(${hue},${saturation}%,${luminosity}%)`
                         }}
                         onMouseDown={(e) => handleHueLumMap(e)}
                         onMouseMove={(e) => handleHueLumMap(e)}
@@ -294,7 +315,7 @@ export default function partInput(props) {
                         ref={saturationRef}
                         style={{
                             background:
-                                `linear-gradient(0deg, hsl(${hue},0%,${lightness}%), hsla(${hue},100%,${lightness}%))`
+                                `linear-gradient(0deg, hsl(${hue},0%,${luminosity}%), hsla(${hue},100%,${luminosity}%))`
                         }}
                         onMouseDown={(e) => handleSaturationSlider(e)}
                         onMouseMove={(e) => handleSaturationSlider(e)}
@@ -305,7 +326,7 @@ export default function partInput(props) {
                     <slider-thumb
                         style={{
                             top: saturationSliderPos,
-                            background: `hsla(${hue},${saturation}%,${lightness}%)`
+                            background: `hsla(${hue},${saturation}%,${luminosity}%)`
                         }}
                         onMouseDown={(e) => handleSaturationSlider(e)}
                         onMouseMove={(e) => handleSaturationSlider(e)}
@@ -314,6 +335,20 @@ export default function partInput(props) {
                         onTouchEnd={(e) => touchSaturationSlider(e)}
                     />
                 </saturation-slider>
+            </div>
+            <div id="partValues">
+                <div>
+                    <label htmlFor="hue">Hue</label>
+                    <input type="number" id="hue" value={hue} min="0" max="360" onChange={(e) => handleHueInput(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="saturation">Saturation</label>
+                    <input type="number" id="saturation" value={saturation} min="0" max="100" onChange={(e) => handleSaturationInput(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="luminosity">Luminosity</label>
+                    <input type="number" id="luminosity" value={luminosity} min="0" max="100" onChange={(e) => handleLumInput(e.target.value)} />
+                </div>
             </div>
         </div>
     )

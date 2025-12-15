@@ -177,7 +177,7 @@ li {
     padding-right: 2px;
 
     & button {
-      display:flex;
+      display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
@@ -227,96 +227,116 @@ li {
 
 }
 
-#partInput{
+#partInput {
   position: absolute;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  bottom:0;
-  left:0;
-  width:230px;
-  height:220px;
-  background:white;
+  bottom: 0;
+  left: 0;
+  width: 230px;
+  height: 290px;
+  background: white;
   border-top: 1px solid gray;
   border-right: 1px solid gray;
   border-radius: 0 25px 0 0;
 }
-#partName{
-  position:absolute;
-  display:flex;
+
+#partName {
+  position: absolute;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  top:-27px;
-  left:0;
-  width:200px;
-  height:25px;
+  top: -27px;
+  left: 0;
+  width: 200px;
+  height: 25px;
   box-sizing: border-box;
-  padding-left:10px;
+  padding-left: 10px;
   padding-right: 15px;
-  background:white;
+  background: white;
   border-top: 1px solid gray;
   border-right: 1px solid gray;
   border-radius: 0 25px 0 0;
 }
-#partEditor{
-  display:flex;
+
+#partEditor {
+  display: flex;
   flex-direction: row;
 }
 
+#partValues {
+  width: 100%;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 2px;
+  box-sizing: border-box;
+}
+
+#partValues>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
 slider-thumb {
-    position: absolute;
-    cursor: pointer; 
-    border: 2px solid silver;
-    border-radius: 50%; 
-    box-sizing: border-box; 
-    box-shadow: 0 0 2px 1px black;
-    height: 15px; 
-    width: 15px;
+  position: absolute;
+  cursor: pointer;
+  border: 2px solid silver;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 0 0 2px 1px black;
+  height: 15px;
+  width: 15px;
 }
 
 hue-light-map {
-    position: relative;
-    display:block;
-    width:182px;
-    height:181px;
-    padding: 0;
-    box-sizing: border-box;
-    margin:5px;
-    border: 1px solid black;
+  position: relative;
+  display: block;
+  width: 182px;
+  height: 181px;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 5px;
+  border: 1px solid black;
 }
 
-hue-light-map>canvas{
-    position: relative;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+hue-light-map>canvas {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 hue-light-map>slider-thumb {
-    transform: translate(-9px, -9px);
+  transform: translate(-9px, -9px);
 }
 
-saturation-slider{
-    position: relative;
-    width:12px;
-    height:180px;
-}
-saturation-slider>div{
-    width:100%;
-    height:100%;
-    border-radius: 12px; 
-    margin-top:5px;
-    margin-left: 6px;
-    box-sizing: border-box; 
-    border: 1px solid black;
+saturation-slider {
+  position: relative;
+  width: 12px;
+  height: 180px;
 }
 
-saturation-slider>slider-thumb{
-    transform: translate(4px, -1px); 
+saturation-slider>div {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-left: 6px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+saturation-slider>slider-thumb {
+  transform: translate(4px, -1px);
 }
 
 @media screen and (max-width: 600px) {
@@ -343,11 +363,12 @@ saturation-slider>slider-thumb{
       padding-right: 1vw;
 
       & div {
-        & button{
+        & button {
           min-width: 4.5vw;
           width: 4.5vw;
           height: 4.5vw;
         }
+
         & input[type="color"] {
           min-width: 4.5vw;
           width: 4.5vw;
