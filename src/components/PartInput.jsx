@@ -76,7 +76,7 @@ export default function partInput(props) {
     }
 
     //Converts HSL to RGB
-    const hslToRgb =(hsl) => {
+    const hslToRgb = (hsl) => {
         let h = hsl[0],
             s = hsl[1] / 100,
             l = hsl[2] / 100,
@@ -227,18 +227,16 @@ export default function partInput(props) {
     };
 
     //Changes which part is being edited using the arrow buttons in this component
-    const changePart = (direction) =>{
-        if(hover === null){ 
+    const changePart = (direction) => {
+        if (hover === null) {
             setHover(Object.keys(colors)[0]);
-        }else{
-        let partArray = Object.keys(colors);
-        if(direction === 1){
+        } else {
+            let partArray = Object.keys(colors);
             let index = partArray.indexOf(hover);
-            if(index === partArray.length - 1 && direction === 1) index = 0;
-            else if(index === 0 && direction === -1) index = partArray.length - 1
-            else index++;
+            if (index === partArray.length - 1 && direction === 1) index = 0;
+            else if (index === 0 && direction === -1) index = partArray.length - 1
+            else index += direction;
             setHover(partArray[index]);
-        }
         }
     }
 
@@ -258,15 +256,15 @@ export default function partInput(props) {
     //Updates colors object when hue, saturation, or lightness changes
     useEffect(() => {
         //Colors are formatted back to hex string in order to keep url short
-        setColors({...colors, [hover]: rgbToHex(hslToRgb([hue, saturation, lightness]))})
-    },[hue, saturation, lightness])
+        setColors({ ...colors, [hover]: rgbToHex(hslToRgb([hue, saturation, lightness])) })
+    }, [hue, saturation, lightness])
 
     return (
         <div id="partInput">
             <div id="partName">
-                <button onClick={()=>changePart(-1)}>◄</button>
+                <button onClick={() => changePart(-1)}>◄</button>
                 {hover}
-                <button onClick={()=>changePart(1)}>►</button>
+                <button onClick={() => changePart(1)}>►</button>
             </div>
             <div id="partEditor">
                 <hue-light-map>
