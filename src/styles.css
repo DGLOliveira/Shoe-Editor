@@ -16,7 +16,7 @@ nav {
   display: flex;
   top: 0;
   left: 0;
-  height: 60px;
+  height: 50px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -30,7 +30,7 @@ nav {
     align-items: center;
     width: auto;
     padding: 5px 10px 5px 10px;
-    font-size: 28px;
+    font-size: 24px;
     height: auto;
     box-sizing: border-box;
     margin-left: 10px;
@@ -48,7 +48,7 @@ nav {
       border-radius: 0px;
       padding: 6px;
       margin-right: 5px;
-      font-size: 20px;
+      font-size: 18px;
 
       &:hover {
         cursor: pointer;
@@ -136,10 +136,10 @@ ul {
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 60px;
+  top: 50px;
   width: 200px;
   right: -200px;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 50px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -159,13 +159,10 @@ ul {
 li {
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
   justify-content: space-between;
   width: 100%;
-  padding-top: 5%;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-bottom: 5%;
+  padding:5px;
   box-sizing: border-box;
   border-bottom: 1px solid gray;
   background: white;
@@ -235,8 +232,8 @@ li {
   align-items: center;
   bottom: 0;
   left: 0;
-  width: 230px;
-  height: 340px;
+  width: 190px;
+  height: 275px;
   background: white;
   border-top: 1px solid gray;
   border-right: 1px solid gray;
@@ -250,32 +247,51 @@ li {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  top: -27px;
-  left: 0;
-  width: 200px;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
   height: 25px;
   box-sizing: border-box;
-  padding-left: 10px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   background: white;
-  border-top: 1px solid gray;
-  border-right: 1px solid gray;
-  border-radius: 0 25px 0 0;
+  border: 1px solid gray;
+  border-radius: 0 0 25px 25px;
+}
+#partName>button{
+  height:20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 2px outset lightgray;
+  border-radius: 5px;
+  background: lightgray;
+  cursor: pointer;
+}
+
+#partName>button:active{
+  border: 2px inset lightgray;
 }
 
 #partEditor {
   display: flex;
   flex-direction: row;
+  margin-bottom:5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #partValues {
   align-items: center;
   width: 100%;
   margin-top: 5px;
+  margin-bottom: 5px;
   padding-left: 15px;
   padding-right: 15px;
   box-sizing: border-box;
-  height: 83px;
+  height: 53px;
 }
 
 #partValues>div {
@@ -283,8 +299,30 @@ li {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 5px;
+  font-size: 12px;
+  margin: 2px;
   box-sizing: border-box;
+}
+
+#partValues>div>input[type="number"] {
+  width: 50px;
+  height: 16px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid gray;
+  text-align: center;
+}
+
+#partValues>div>input[type="text"] {
+  width:100%;
+  height:12px;
+  font-size: 12px;
+}
+
+#partValues>div>button {
+  font-size:12px;
+  height:18px;
+  text-align: center;
 }
 
 .partButtons{
@@ -296,13 +334,17 @@ li {
   box-sizing: border-box;
   padding-left:15px;
   padding-right: 15px;
+  margin-top:2px;
+  margin-bottom:2px;
 }
 
 .partButtons>button{
   width: 50%;
+  font-size: 10px;
+  height:18px;
   box-sizing: border-box;
-  border-bottom: 3px outset gray;
-  border-top:  3px outset gray;
+  border-bottom: 2px outset gray;
+  border-top:  2px outset gray;
   background: lightgray;
   cursor: pointer;
   text-shadow: 0 0 2px white;
@@ -317,27 +359,27 @@ li {
 }
 
 .partButtons>button.active{
-  border-bottom:  3px inset gray;
-  border-top:  3px inset gray;
+  border-bottom:  2px inset gray;
+  border-top:  2px inset gray;
   background: lightskyblue;
 }
 
 .partButtons>button:first-child{
   border-radius: 12px 0 0 12px;
-  border-left:  3px outset gray;
+  border-left:  2px outset gray;
 }
 
 .partButtons>button:first-child.active{ 
-  border-left:  3px inset gray;
+  border-left:  2px inset gray;
 }
 
 .partButtons>button:last-child{
   border-radius: 0 12px 12px 0;
-  border-right:  3px outset gray;
+  border-right:  2px outset gray;
 }
 
 .partButtons>button:last-child.active{
-  border-right:  3px inset gray;
+  border-right:  2px inset gray;
 }
 
 slider-thumb {
@@ -354,8 +396,8 @@ slider-thumb {
 hue-light-map {
   position: relative;
   display: block;
-  width: 182px;
-  height: 181px;
+  width: 142px;
+  height: 141px;
   padding: 0;
   box-sizing: border-box;
   margin: 5px;
@@ -377,7 +419,7 @@ hue-light-map>slider-thumb {
 saturation-slider {
   position: relative;
   width: 12px;
-  height: 180px;
+  height: 140px;
 }
 
 saturation-slider>div {

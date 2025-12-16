@@ -187,10 +187,8 @@ export default function App() {
   const [renderOnPop, setRenderOnPop] = useState(false) //needed to force render on pop state change
 
   const onPop = async () => {
-    console.log("onPop")
     let params = urlControler.prototype.get()
     if (params.Category && params.Name) {
-      console.log(model.Category, model.Name, params.Category, params.Name)
       if (model.Category !== params.Category || model.Name !== params.Name) {
         ModelList.map((item) => {
           if (item.Category === params.Category && item.Name === params.Name) {
@@ -201,7 +199,6 @@ export default function App() {
         })
         setInitModel()
       } else {
-        console.log(colors, extras)
         let newColors = colors
         let newExtras = extras
         Object.keys(newExtras).map((key) => {
