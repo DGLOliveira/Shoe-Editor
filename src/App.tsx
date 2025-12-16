@@ -42,6 +42,7 @@ export default function App() {
     React.Dispatch<React.SetStateAction<boolean>>
   ] = useState(false)
 
+
   useEffect(() => {
     if (copiedColor !== "") {
       setCanCopy(true)
@@ -145,19 +146,95 @@ export default function App() {
     }
   }, [model])
 
-  // Updates URL to new values, pushes to history
+  // Verifies if model values have changed, compares to URL values and Updates URL if they are different, pushes to history
   // Note: Timeout prevents flooding history with rapidly changing params inputs
   useEffect(() => {
     if (model.Category && model.Name) {
       const timeout = setTimeout(() => {
-        if (model && colors && extras)
-          urlControler.prototype.update(model, colors, extras)
+        if (model && colors && extras) {
+          let flag = false
+          let params = urlControler.prototype.get()
+          if (params.Category !== model.Category || params.Name !== model.Name) {
+            flag = true
+          }
+          if (!flag) {
+            Object.keys(extras).map((key) => {
+              if (params[key] !== String(extras[key])) {
+                flag = true
+              }
+            })
+          }
+          if (!flag) {
+            Object.keys(colors).map((key) => {
+              if (params[key] !== colors[key]) {
+                flag = true
+              }
+            })
+          }
+          if (flag) {
+            urlControler.prototype.update(model, colors, extras)
+          }
+        }
       }, 500)
       if (timeout) {
         return () => clearTimeout(timeout)
       }
     }
   }, [model, colors, extras])
+
+  //Verifies and updates values from URL, to be used on history changes
+
+  const [renderOnPop, setRenderOnPop] = useState(false) //needed to force render on pop state change
+
+  const onPop = async () => {
+    console.log("onPop")
+    let params = urlControler.prototype.get()
+    if (params.Category && params.Name) {
+      console.log(model.Category, model.Name, params.Category, params.Name)
+      if (model.Category !== params.Category || model.Name !== params.Name) {
+        ModelList.map((item) => {
+          if (item.Category === params.Category && item.Name === params.Name) {
+            setModel(item)
+            setRenderOnPop(!renderOnPop)
+            return
+          }
+        })
+        setInitModel()
+      } else {
+        console.log(colors, extras)
+        let newColors = colors
+        let newExtras = extras
+        Object.keys(newExtras).map((key) => {
+          if (params[key] !== undefined) {
+            if (params[key] === "true") {
+              newExtras[key] = true
+            } else if (params[key] === "false") {
+              newExtras[key] = false
+            }
+          }
+        })
+        Object.keys(newColors).map((key) => {
+          if (params[key] !== undefined) {
+            if (/^#[0-9A-F]{6}$/i.test(params[key])) {
+              newColors[key] = params[key]
+            }
+          }
+        })
+        setColors(newColors)
+        setExtras(newExtras)
+        setRenderOnPop(!renderOnPop)
+      }
+    } else {
+      setInitModel()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("popstate", onPop)
+    return () => {
+      window.removeEventListener("popstate", onPop)
+    }
+  }, [onPop])
 
   return (
     <>
