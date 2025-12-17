@@ -28,7 +28,6 @@ export default function Menu(props:
         if (menu === "share") setUrl(window.location.href)
     }, [menu])
 
-
     return (
         <>
             <ul className={menu === "models" ? "expandMenu" : ""}>
@@ -95,6 +94,7 @@ export default function Menu(props:
                 )}
             </ul>
             <ul className={menu === "extras" ? "expandMenu" : ""}>
+                <li className="spacer"></li>
                 {Object.keys(extras).length !== 0 ? Object.keys(extras).map((name, index, arr) =>
                     <li
                         key={index}
@@ -128,6 +128,7 @@ export default function Menu(props:
                 ) : <li>No extra features available for this model</li>}
             </ul>
             <ul className={menu === "share" ? "expandMenu" : ""}>
+                <li className="spacer"></li>
                 <li style={{ flexDirection: "column" }}>
                     <button
                         id="copyLinkButton"
