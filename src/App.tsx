@@ -265,6 +265,8 @@ export default function App() {
         colorSwatch={colorSwatch}
         setColorSwatch={setColorSwatch}
         colors={colors}
+        extras={extras}
+        setExtras={setExtras}
       />
       {model && colors && extras && <Scenario
         model={model}

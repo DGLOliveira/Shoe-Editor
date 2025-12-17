@@ -99,6 +99,7 @@ input[type="checkbox"] {
 }
 
 .switch {
+  display:block;
   width: 40px;
   height: 20px;
   border: 2px solid gray;
@@ -118,7 +119,7 @@ input[type="checkbox"] {
     width: 16px;
     margin: 0px;
     margin-top: -2px;
-    margin-left: 12px;
+    margin-left: 10px;
     background: red;
     border: 2px solid dimgray;
     border-radius: 50%;
@@ -126,7 +127,7 @@ input[type="checkbox"] {
   }
 
   &>.switchButtonOn {
-    margin-left: -11px;
+    margin-left: -10px;
     background: limegreen;
   }
 }
@@ -291,6 +292,24 @@ li {
 #openColors:disabled{
   filter: grayscale(75%);
   cursor: not-allowed;
+}
+
+#visibility{
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 49px;
+  left: 50%;
+  transform: translateX(-50%);
+  width:80px;
+  height:25px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 0 0 25px 25px;
+  transition: 0.3s ease-in-out;
+  z-index: 1;
 }
 
 #colorSwatch {
