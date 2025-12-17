@@ -118,10 +118,10 @@ ul {
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 50px;
+  top: 25px;
   width: 200px;
   right: -200px;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 25px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -148,6 +148,11 @@ li {
   box-sizing: border-box;
   border-bottom: 1px solid gray;
   background: white;
+
+  &.spacer {
+    min-height: 25px;
+    background: repeating-linear-gradient(45deg, lightgray, lightgray 4px, gray 6px, gray 10px, lightgray 12px);
+  }
 
   & div {
     display: flex;
@@ -469,7 +474,7 @@ saturation-slider>slider-thumb {
   transform: translate(4px, -1px);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   nav {
     & h1 {
       font-size: 3.5vw;
@@ -486,6 +491,8 @@ saturation-slider>slider-thumb {
   ul {
     width: 35vw;
     right: -35vw;
+    top: 50px;
+    height: calc(100vh - 50px);
 
     & li {
       font-size: 3.5vw;

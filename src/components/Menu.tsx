@@ -32,6 +32,7 @@ export default function Menu(props:
     return (
         <>
             <ul className={menu === "models" ? "expandMenu" : ""}>
+                <li className="spacer"></li>
                 {models.map((item, index) =>
                     <li
                         key={index}
@@ -52,6 +53,7 @@ export default function Menu(props:
                 )}
             </ul>
             <ul className={menu === "colors" ? "expandMenu" : ""}>
+                <li className="spacer"></li>
                 {Object.keys(colors).map((name, index, arr) =>
                     <li key={index}
                         onMouseOver={() => selected !== name && setSelected(name)}
