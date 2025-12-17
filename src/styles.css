@@ -511,4 +511,14 @@ saturation-slider>slider-thumb {
     }
   }
 
+  slider-thumb {
+    height: 19px;
+    width: 19px;
+  }
+
+  saturation-slider>slider-thumb {
+    transform: translate(2px, -1px);
+  }
+
+
 }
