@@ -231,7 +231,69 @@ li {
 
 }
 
-#partInput {
+#selector {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 25px;
+  box-sizing: border-box;
+  padding-left: 14px;
+  padding-right: 14px;
+  background: white;
+  border: 1px solid gray;
+  border-radius: 0 0 25px 25px;
+  z-index: 1;
+}
+
+#selector>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+}
+
+#selector>div>button{
+  height:18px;
+  width: 28px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 2px outset silver;
+  border-radius: 10px;
+  background: lightgray;
+  cursor: pointer;
+}
+
+#selector>div>button:active{
+  border: 2px inset silver;
+}
+
+#selector>div>button.active{
+  border: 2px inset silver;
+}
+
+#openColors{
+  background: conic-gradient(in hsl longer hue, red, red) !important;
+  filter: grayscale(0%);
+  transition:0.3s ease-in-out;
+}
+
+#openColors:disabled{
+  filter: grayscale(75%);
+  cursor: not-allowed;
+}
+
+#colorSwatch {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -245,44 +307,10 @@ li {
   border-top: 1px solid gray;
   border-right: 1px solid gray;
   border-radius: 0 25px 0 0;
+  transition: 0.3s ease-in-out;
 }
 
-#partName {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 220px;
-  height: 25px;
-  box-sizing: border-box;
-  padding-left: 20px;
-  padding-right: 20px;
-  background: white;
-  border: 1px solid gray;
-  border-radius: 0 0 25px 25px;
-}
-#partName>button{
-  height:20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border: 2px outset lightgray;
-  border-radius: 5px;
-  background: lightgray;
-  cursor: pointer;
-}
-
-#partName>button:active{
-  border: 2px inset lightgray;
-}
-
-#partEditor {
+#colorSliders {
   display: flex;
   flex-direction: row;
   margin-bottom:5px;
@@ -290,7 +318,7 @@ li {
   padding-right: 15px;
 }
 
-#partValues {
+#colorValues {
   align-items: center;
   width: 100%;
   margin-top: 5px;
@@ -301,7 +329,7 @@ li {
   height: 53px;
 }
 
-#partValues>div {
+#colorValues>div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -311,7 +339,7 @@ li {
   box-sizing: border-box;
 }
 
-#partValues>div>input[type="number"] {
+#colorValues>div>input[type="number"] {
   width: 50px;
   height: 16px;
   box-sizing: border-box;
@@ -320,19 +348,19 @@ li {
   text-align: center;
 }
 
-#partValues>div>input[type="text"] {
+#colorValues>div>input[type="text"] {
   width:100%;
   height:12px;
   font-size: 12px;
 }
 
-#partValues>div>button {
+#colorValues>div>button {
   font-size:12px;
   height:18px;
   text-align: center;
 }
 
-.partButtons{
+.colorButtons{
   width:100%;
   display:flex;
   flex-direction:row;
@@ -345,7 +373,7 @@ li {
   margin-bottom:2px;
 }
 
-.partButtons>button{
+.colorButtons>button{
   width: 50%;
   font-size: 10px;
   height:18px;
@@ -357,35 +385,35 @@ li {
   text-shadow: 0 0 2px white;
 }
 
-.partButtons>button:hover{
+.colorButtons>button:hover{
   background: lightblue;
 }
 
-.partButtons>button:active{
+.colorButtons>button:active{
   background: lightskyblue;
 }
 
-.partButtons>button.active{
+.colorButtons>button.active{
   border-bottom:  2px inset gray;
   border-top:  2px inset gray;
   background: lightskyblue;
 }
 
-.partButtons>button:first-child{
+.colorButtons>button:first-child{
   border-radius: 12px 0 0 12px;
   border-left:  2px outset gray;
 }
 
-.partButtons>button:first-child.active{ 
+.colorButtons>button:first-child.active{ 
   border-left:  2px inset gray;
 }
 
-.partButtons>button:last-child{
+.colorButtons>button:last-child{
   border-radius: 0 12px 12px 0;
   border-right:  2px outset gray;
 }
 
-.partButtons>button:last-child.active{
+.colorButtons>button:last-child.active{
   border-right:  2px inset gray;
 }
 

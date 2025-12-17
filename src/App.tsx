@@ -4,7 +4,8 @@ import Menu from "./components/Menu.tsx"
 import Scenario from "./components/Scenario.jsx"
 import urlControler from "./controllers/url.ts"
 import ModelList from "./data/Model_List.json"
-import PartInput from "./components/PartInput.jsx"
+import Selector from "./components/Selector.tsx"
+import ColorSwatch from "./components/ColorSwatch.jsx"
 import "./styles.css";
 
 export default function App() {
@@ -28,6 +29,10 @@ export default function App() {
   const [extras, setExtras]: [{ [key: string]: boolean },
     React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>]
     = useState({})
+
+  const [colorSwatch, setColorSwatch]: [boolean, 
+    React.Dispatch<React.SetStateAction<boolean>>]
+    = useState(false)
 
   const [hover, setHover]: [string | null,
     React.Dispatch<React.SetStateAction<string | null>>]
@@ -255,6 +260,13 @@ export default function App() {
         setCopiedColor={setCopiedColor}
         canCopy={canCopy}
       />
+      <Selector
+        hover={hover}
+        setHover={setHover}
+        colorSwatch={colorSwatch}
+        setColorSwatch={setColorSwatch}
+        colors={colors}
+      />
       {model && colors && extras && <Scenario
         model={model}
         colors={colors}
@@ -262,7 +274,7 @@ export default function App() {
         hover={hover}
         setHover={setHover}
       />}
-      <PartInput
+      <ColorSwatch
         hover={hover}
         setHover={setHover}
         colors={colors}
@@ -270,6 +282,7 @@ export default function App() {
         copiedColor={copiedColor}
         setCopiedColor={setCopiedColor}
         canCopy={canCopy}
+        colorSwatch={colorSwatch}
       />
     </>
   );

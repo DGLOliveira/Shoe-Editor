@@ -1,8 +1,8 @@
 //Code forked and adapted from Virtual desktop project
 
 import { useState, useRef, useEffect } from "react"
-export default function partInput(props) {
-    const { hover, setHover, colors, setColors, copiedColor, setCopiedColor, canCopy } = props
+export default function ColorSwatch(props) {
+    const { hover, colors, setColors, copiedColor, setCopiedColor, canCopy, colorSwatch } = props
     const hueLumRef = useRef(null)
     const saturationRef = useRef(null);
     const [colorSelectorPos, setColorSelectorPos] = useState({ x: 0, y: 0 });
@@ -296,20 +296,6 @@ export default function partInput(props) {
         }
     }
 
-    //Changes which part is being edited using the arrow buttons in this component
-    const changePart = (direction) => {
-        if (hover === null) {
-            setHover(Object.keys(colors)[0]);
-        } else {
-            let partArray = Object.keys(colors);
-            let index = partArray.indexOf(hover);
-            if (index === partArray.length - 1 && direction === 1) index = 0;
-            else if (index === 0 && direction === -1) index = partArray.length - 1
-            else index += direction;
-            setHover(partArray[index]);
-        }
-    }
-
     //Updates color map, saturation map and repective slider positions
     useEffect(() => {
         if (hueLumRef.current && saturationRef.current) {
@@ -328,118 +314,111 @@ export default function partInput(props) {
     }, [selectedInputs, hex])
 
     return (
-        <>
-            <div id="partName">
-                <button onClick={() => changePart(-1)}>◄</button>
-                {hover !== null ? hover : "Select a part"}
-                <button onClick={() => changePart(1)}>►</button>
+        <div id="colorSwatch" style={{transform: colorSwatch ? "" : "translateY(276px)" }}>
+            <div id="colorSliders">
+                <hue-light-map>
+                    <canvas
+                        onMouseDown={(e) => handleHueLumMap(e)}
+                        onMouseMove={(e) => handleHueLumMap(e)}
+                        onTouchMove={(e) => touchHueLumMap(e)}
+                        onTouchStart={(e) => touchHueLumMap(e)}
+                        onTouchEnd={(e) => touchHueLumMap(e)}
+                        ref={hueLumRef} width="180" height="180"
+                    />
+                    <slider-thumb
+                        style={{
+                            top: colorSelectorPos.y,
+                            left: colorSelectorPos.x,
+                            background: `hsl(${hsl[0]},${hsl[1]}%,${hsl[2]}%)`
+                        }}
+                        onMouseDown={(e) => handleHueLumMap(e)}
+                        onMouseMove={(e) => handleHueLumMap(e)}
+                        onTouchMove={(e) => touchHueLumMap(e)}
+                        onTouchStart={(e) => touchHueLumMap(e)}
+                        onTouchEnd={(e) => touchHueLumMap(e)}
+                    />
+                </hue-light-map>
+                <saturation-slider title="Saturation">
+                    <div
+                        ref={saturationRef}
+                        style={{
+                            background:
+                                `linear-gradient(0deg, hsl(${hsl[0]},0%,${hsl[2]}%), hsl(${hsl[0]},100%,${hsl[2]}%))`
+                        }}
+                        onMouseDown={(e) => handleSaturationSlider(e)}
+                        onMouseMove={(e) => handleSaturationSlider(e)}
+                        onTouchMove={(e) => touchSaturationSlider(e)}
+                        onTouchStart={(e) => touchSaturationSlider(e)}
+                        onTouchEnd={(e) => touchSaturationSlider(e)}
+                    />
+                    <slider-thumb
+                        style={{
+                            top: saturationSliderPos,
+                            background: `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%)`
+                        }}
+                        onMouseDown={(e) => handleSaturationSlider(e)}
+                        onMouseMove={(e) => handleSaturationSlider(e)}
+                        onTouchMove={(e) => touchSaturationSlider(e)}
+                        onTouchStart={(e) => touchSaturationSlider(e)}
+                        onTouchEnd={(e) => touchSaturationSlider(e)}
+                    />
+                </saturation-slider>
             </div>
-            <div id="partInput">
-                <div id="partEditor">
-                    <hue-light-map>
-                        <canvas
-                            onMouseDown={(e) => handleHueLumMap(e)}
-                            onMouseMove={(e) => handleHueLumMap(e)}
-                            onTouchMove={(e) => touchHueLumMap(e)}
-                            onTouchStart={(e) => touchHueLumMap(e)}
-                            onTouchEnd={(e) => touchHueLumMap(e)}
-                            ref={hueLumRef} width="180" height="180"
-                        />
-                        <slider-thumb
-                            style={{
-                                top: colorSelectorPos.y,
-                                left: colorSelectorPos.x,
-                                background: `hsl(${hsl[0]},${hsl[1]}%,${hsl[2]}%)`
-                            }}
-                            onMouseDown={(e) => handleHueLumMap(e)}
-                            onMouseMove={(e) => handleHueLumMap(e)}
-                            onTouchMove={(e) => touchHueLumMap(e)}
-                            onTouchStart={(e) => touchHueLumMap(e)}
-                            onTouchEnd={(e) => touchHueLumMap(e)}
-                        />
-                    </hue-light-map>
-                    <saturation-slider title="Saturation">
-                        <div
-                            ref={saturationRef}
-                            style={{
-                                background:
-                                    `linear-gradient(0deg, hsl(${hsl[0]},0%,${hsl[2]}%), hsl(${hsl[0]},100%,${hsl[2]}%))`
-                            }}
-                            onMouseDown={(e) => handleSaturationSlider(e)}
-                            onMouseMove={(e) => handleSaturationSlider(e)}
-                            onTouchMove={(e) => touchSaturationSlider(e)}
-                            onTouchStart={(e) => touchSaturationSlider(e)}
-                            onTouchEnd={(e) => touchSaturationSlider(e)}
-                        />
-                        <slider-thumb
-                            style={{
-                                top: saturationSliderPos,
-                                background: `hsla(${hsl[0]},${hsl[1]}%,${hsl[2]}%)`
-                            }}
-                            onMouseDown={(e) => handleSaturationSlider(e)}
-                            onMouseMove={(e) => handleSaturationSlider(e)}
-                            onTouchMove={(e) => touchSaturationSlider(e)}
-                            onTouchStart={(e) => touchSaturationSlider(e)}
-                            onTouchEnd={(e) => touchSaturationSlider(e)}
-                        />
-                    </saturation-slider>
-                </div>
-                <div className="partButtons">
-                    <button className={selectedInputs === "HEX" ? "active" : ""} onClick={() => setSelectedInputs("HEX")}>HEX</button>
-                    <button className={selectedInputs === "HSL" ? "active" : ""} onClick={() => setSelectedInputs("HSL")}>HSL</button>
-                    <button className={selectedInputs === "RGB" ? "active" : ""} onClick={() => setSelectedInputs("RGB")}>RGB</button>
-                </div>
-                <div id="partValues">
-                    {selectedInputs === "HSL" &&
-                        <>
-                            <div>
-                                <label htmlFor="hue">Hue</label>
-                                <input type="number" id="hue" value={hsl[0]} min="0" max="360" onChange={(e) => handleHSLInput("h", e.target.value)} />
-                            </div>
-                            <div>
-                                <label htmlFor="saturation">Saturation</label>
-                                <input type="number" id="saturation" value={hsl[1]} min="0" max="100" onChange={(e) => handleHSLInput("s", e.target.value)} />
-                            </div>
-                            <div>
-                                <label htmlFor="luminosity">Luminosity</label>
-                                <input type="number" id="luminosity" value={hsl[2]} min="0" max="100" onChange={(e) => handleHSLInput("l", e.target.value)} />
-                            </div>
-                        </>}
-                    {selectedInputs === "RGB" &&
-                        <>
-                            <div>
-                                <label htmlFor="red">Red</label>
-                                <input type="number" id="red" value={rgb[0]} min="0" max="255" onChange={(e) => handleRGBInput("r", e.target.value)} />
-                            </div>
-                            <div>
-                                <label htmlFor="green">Green</label>
-                                <input type="number" id="green" value={rgb[1]} min="0" max="255" onChange={(e) => handleRGBInput("g", e.target.value)} />
-                            </div>
-                            <div>
-                                <label htmlFor="blue">Blue</label>
-                                <input type="number" id="blue" value={rgb[2]} min="0" max="255" onChange={(e) => handleRGBInput("b", e.target.value)} />
-                            </div>
-                        </>
-                    }{
-                        selectedInputs === "HEX" &&
-                        <>
-                            <div style={{ justifyContent: "center" }}>
-                                <input type="text" id="hex" pattern="#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?" value={hexInput} onChange={(e) => setHexInput(e.target.value)} />
-                            </div>
-                            <div style={{ justifyContent: "center" }}>
-                                <button onClick={() => handleHEXInput()}>Confirm</button>
-                            </div>
-                            <div style={{ justifyContent: "center", color: "red" }}>
-                                {invalidHex && "Invalid Value!"}
-                            </div>
-                        </>
-                    }
-                </div>
-                <div className="partButtons">
-                    <button onClick={() => setCopiedColor(hex)}>Copy</button>
-                    <button enabled={canCopy} style={{ background: copiedColor !== "" ? copiedColor : "lightgray" }} onClick={() => updateAllColors("hex", copiedColor)}>Paste</button>
-                </div>
+            <div className="colorButtons">
+                <button className={selectedInputs === "HEX" ? "active" : ""} onClick={() => setSelectedInputs("HEX")}>HEX</button>
+                <button className={selectedInputs === "HSL" ? "active" : ""} onClick={() => setSelectedInputs("HSL")}>HSL</button>
+                <button className={selectedInputs === "RGB" ? "active" : ""} onClick={() => setSelectedInputs("RGB")}>RGB</button>
             </div>
-        </>
+            <div id="colorValues">
+                {selectedInputs === "HSL" &&
+                    <>
+                        <div>
+                            <label htmlFor="hue">Hue</label>
+                            <input type="number" id="hue" value={hsl[0]} min="0" max="360" onChange={(e) => handleHSLInput("h", e.target.value)} />
+                        </div>
+                        <div>
+                            <label htmlFor="saturation">Saturation</label>
+                            <input type="number" id="saturation" value={hsl[1]} min="0" max="100" onChange={(e) => handleHSLInput("s", e.target.value)} />
+                        </div>
+                        <div>
+                            <label htmlFor="luminosity">Luminosity</label>
+                            <input type="number" id="luminosity" value={hsl[2]} min="0" max="100" onChange={(e) => handleHSLInput("l", e.target.value)} />
+                        </div>
+                    </>}
+                {selectedInputs === "RGB" &&
+                    <>
+                        <div>
+                            <label htmlFor="red">Red</label>
+                            <input type="number" id="red" value={rgb[0]} min="0" max="255" onChange={(e) => handleRGBInput("r", e.target.value)} />
+                        </div>
+                        <div>
+                            <label htmlFor="green">Green</label>
+                            <input type="number" id="green" value={rgb[1]} min="0" max="255" onChange={(e) => handleRGBInput("g", e.target.value)} />
+                        </div>
+                        <div>
+                            <label htmlFor="blue">Blue</label>
+                            <input type="number" id="blue" value={rgb[2]} min="0" max="255" onChange={(e) => handleRGBInput("b", e.target.value)} />
+                        </div>
+                    </>
+                }{
+                    selectedInputs === "HEX" &&
+                    <>
+                        <div style={{ justifyContent: "center" }}>
+                            <input type="text" id="hex" pattern="#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?" value={hexInput} onChange={(e) => setHexInput(e.target.value)} />
+                        </div>
+                        <div style={{ justifyContent: "center" }}>
+                            <button onClick={() => handleHEXInput()}>Confirm</button>
+                        </div>
+                        <div style={{ justifyContent: "center", color: "red" }}>
+                            {invalidHex && "Invalid Value!"}
+                        </div>
+                    </>
+                }
+            </div>
+            <div className="colorButtons">
+                <button onClick={() => setCopiedColor(hex)}>Copy</button>
+                <button enabled={canCopy} style={{ background: copiedColor !== "" ? copiedColor : "lightgray" }} onClick={() => updateAllColors("hex", copiedColor)}>Paste</button>
+            </div>
+        </div>
     )
 } 
