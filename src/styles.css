@@ -66,32 +66,6 @@ input:hover {
   cursor: pointer;
 }
 
-input[type="color"] {
-  min-width: 40px;
-  width: 40px;
-  height: 20px;
-  padding: 0px;
-  border: 2px solid dimgray;
-  border-radius: 10px;
-  box-sizing: border-box;
-
-  &::-moz-color-swatch {
-    border-width: 0;
-  }
-
-  &::-moz-color-swatch-wrapper {
-    padding: 0px;
-  }
-
-  &::-webkit-color-swatch {
-    border-width: 0;
-  }
-
-  &::-webkit-color-swatch-wrapper {
-    padding: 0px;
-  }
-}
-
 input[type="checkbox"] {
   opacity: 0;
   width: 0;
@@ -99,7 +73,7 @@ input[type="checkbox"] {
 }
 
 .switch {
-  display:block;
+  display: block;
   width: 40px;
   height: 20px;
   border: 2px solid gray;
@@ -132,8 +106,8 @@ input[type="checkbox"] {
   }
 }
 
-#scenario{
-  position: absolute; 
+#scenario {
+  position: absolute;
   height: calc(100vh - 50px);
   width: 100%;
   top: 50px;
@@ -170,7 +144,7 @@ li {
   font-size: 14px;
   justify-content: space-between;
   width: 100%;
-  padding:5px;
+  padding: 5px;
   box-sizing: border-box;
   border-bottom: 1px solid gray;
   background: white;
@@ -194,6 +168,11 @@ li {
       border-style: outset;
       border-radius: 8px;
       background: white;
+
+      & svg {
+        filter: drop-shadow(0 0 3px white);
+
+      }
     }
   }
 
@@ -261,8 +240,8 @@ li {
   width: 60px;
 }
 
-#selector>div>button{
-  height:18px;
+#selector>div>button {
+  height: 18px;
   width: 28px;
   font-size: 12px;
   display: flex;
@@ -275,27 +254,27 @@ li {
   cursor: pointer;
 }
 
-#selector>div>button:active{
+#selector>div>button:active {
   border: 2px inset silver;
 }
 
-#selector>div>button.active{
+#selector>div>button.active {
   border: 2px inset silver;
 }
 
-#openColors{
+#openColors {
   background: conic-gradient(in hsl longer hue, red, red) !important;
   filter: grayscale(0%);
-  transition:0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
-#openColors:disabled{
+#openColors:disabled {
   filter: grayscale(75%);
   cursor: not-allowed;
 }
 
-#visibility{
-  position:absolute;
+#visibility {
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -303,8 +282,8 @@ li {
   top: 49px;
   left: 50%;
   transform: translateX(-50%);
-  width:80px;
-  height:25px;
+  width: 80px;
+  height: 25px;
   background-color: white;
   border: 1px solid gray;
   border-radius: 0 0 25px 25px;
@@ -332,7 +311,7 @@ li {
 #colorSliders {
   display: flex;
   flex-direction: row;
-  margin-bottom:5px;
+  margin-bottom: 5px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -368,72 +347,72 @@ li {
 }
 
 #colorValues>div>input[type="text"] {
-  width:100%;
-  height:12px;
+  width: 100%;
+  height: 12px;
   font-size: 12px;
 }
 
 #colorValues>div>button {
-  font-size:12px;
-  height:18px;
+  font-size: 12px;
+  height: 18px;
   text-align: center;
 }
 
-.colorButtons{
-  width:100%;
-  display:flex;
-  flex-direction:row;
-  justify-content:stretch;
+.colorButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
   align-items: center;
   box-sizing: border-box;
-  padding-left:15px;
+  padding-left: 15px;
   padding-right: 15px;
-  margin-top:2px;
-  margin-bottom:2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
-.colorButtons>button{
+.colorButtons>button {
   width: 50%;
   font-size: 10px;
-  height:18px;
+  height: 18px;
   box-sizing: border-box;
   border-bottom: 2px outset gray;
-  border-top:  2px outset gray;
+  border-top: 2px outset gray;
   background: lightgray;
   cursor: pointer;
   text-shadow: 0 0 2px white;
 }
 
-.colorButtons>button:hover{
+.colorButtons>button:hover {
   background: lightblue;
 }
 
-.colorButtons>button:active{
+.colorButtons>button:active {
   background: lightskyblue;
 }
 
-.colorButtons>button.active{
-  border-bottom:  2px inset gray;
-  border-top:  2px inset gray;
+.colorButtons>button.active {
+  border-bottom: 2px inset gray;
+  border-top: 2px inset gray;
   background: lightskyblue;
 }
 
-.colorButtons>button:first-child{
+.colorButtons>button:first-child {
   border-radius: 12px 0 0 12px;
-  border-left:  2px outset gray;
+  border-left: 2px outset gray;
 }
 
-.colorButtons>button:first-child.active{ 
-  border-left:  2px inset gray;
+.colorButtons>button:first-child.active {
+  border-left: 2px inset gray;
 }
 
-.colorButtons>button:last-child{
+.colorButtons>button:last-child {
   border-radius: 0 12px 12px 0;
-  border-right:  2px outset gray;
+  border-right: 2px outset gray;
 }
 
-.colorButtons>button:last-child.active{
-  border-right:  2px inset gray;
+.colorButtons>button:last-child.active {
+  border-right: 2px inset gray;
 }
 
 slider-thumb {
@@ -515,12 +494,6 @@ saturation-slider>slider-thumb {
 
       & div {
         & button {
-          min-width: 4.5vw;
-          width: 4.5vw;
-          height: 4.5vw;
-        }
-
-        & input[type="color"] {
           min-width: 4.5vw;
           width: 4.5vw;
           height: 4.5vw;

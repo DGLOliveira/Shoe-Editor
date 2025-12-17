@@ -54,7 +54,6 @@ export default function Menu(props:
             <ul className={menu === "colors" ? "expandMenu" : ""}>
                 {Object.keys(colors).map((name, index, arr) =>
                     <li key={index}
-                        onClick={() => document.getElementsByName(name)[0].click()}
                         onMouseOver={() => selected !== name && setSelected(name)}
                         style={{background: selected === name ? "lightskyblue" : "white"}}
                         >
@@ -62,7 +61,10 @@ export default function Menu(props:
                         <div>
                             <button
                                 arial-label="Copy color"
-                                style={{cursor: "copy"}}
+                                style={{
+                                    background: colors[arr[index]],
+                                    cursor: "copy"
+                                }}
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     setCopiedColor(colors[arr[index]])
@@ -86,14 +88,6 @@ export default function Menu(props:
                             >
                                 <MdContentPaste />
                             </button>
-                            <input
-                                type="color"
-                                name={name}
-                                value={colors[arr[index]]}
-                                onChange={(e) =>
-                                    setColors({ ...colors, [e.target.name]: e.target.value })
-                                }
-                            />
                         </div>
                     </li>
                 )}
