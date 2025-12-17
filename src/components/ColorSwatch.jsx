@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 export default function ColorSwatch(props) {
-    const { hover, colors, setColors, copiedColor, setCopiedColor, canCopy, colorSwatch } = props
+    const { selected, colors, setColors, copiedColor, setCopiedColor, canCopy, colorSwatch } = props
     const hueLumRef = useRef(null)
     const saturationRef = useRef(null);
     const [colorSelectorPos, setColorSelectorPos] = useState({ x: 0, y: 0 });
@@ -145,13 +145,13 @@ export default function ColorSwatch(props) {
         setHex(newHex);
         setHSL(newHSL);
         setRGB(newRGB);
-        if (hover) setColors({ ...colors, [hover]: newHex });
+        if (selected) setColors({ ...colors, [selected]: newHex });
     }
 
-    //Updates color formatted values when mouse hovers over a different part of the shoe
+    //Updates color formatted values when mouse selecteds over a different part of the shoe
     useEffect(() => {
-        if (hover) {
-            let color = colors[hover];
+        if (selected) {
+            let color = colors[selected];
             let hexColor = "";
             let rgbColor = [];
             let hslColor = [];
@@ -185,7 +185,7 @@ export default function ColorSwatch(props) {
             setSaturationSliderPos(((100 - hslColor[1]) / 100) * saturationRect.height);
 
         }
-    }, [hover])
+    }, [selected])
 
     //Genetates a hue and luminance 2D color pixel map for canvas
     const drawColorMap = (ctx) => {
@@ -307,7 +307,7 @@ export default function ColorSwatch(props) {
             setSaturationSliderPos(((100 - hsl[1]) / 100) * vert.height);
         }
 
-    }, [hover, hex]);
+    }, [selected, hex]);
 
     useEffect(() => {
         setHexInput(hex);

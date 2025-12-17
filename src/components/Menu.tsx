@@ -11,14 +11,14 @@ export default function Menu(props:
         setColors: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>
         extras: { [key: string]: boolean }
         setExtras: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
-        hover: string | null
-        setHover: React.Dispatch<React.SetStateAction<string | null>>
+        selected: string
+        setSelected: React.Dispatch<React.SetStateAction<string>>
         copiedColor: string
         setCopiedColor: React.Dispatch<React.SetStateAction<string>>
         canCopy: boolean
     }
 ) {
-    const { menu, model, setModel, models, colors, setColors, extras, setExtras, hover, setHover, copiedColor, setCopiedColor, canCopy } = props
+    const { menu, model, setModel, models, colors, setColors, extras, setExtras, selected, setSelected, copiedColor, setCopiedColor, canCopy } = props
 
     const [url, setUrl]:
         [string, React.Dispatch<React.SetStateAction<string>>]
@@ -55,8 +55,8 @@ export default function Menu(props:
                 {Object.keys(colors).map((name, index, arr) =>
                     <li key={index}
                         onClick={() => document.getElementsByName(name)[0].click()}
-                        onMouseOver={() => hover !== name && setHover(name)}
-                        style={{background: hover === name ? "lightskyblue" : "white"}}
+                        onMouseOver={() => selected !== name && setSelected(name)}
+                        style={{background: selected === name ? "lightskyblue" : "white"}}
                         >
                         {name}
                         <div>
@@ -108,8 +108,8 @@ export default function Menu(props:
                                 [arr[index]]: !extras[arr[index]]
                             })
                         }
-                        onMouseOver={() => hover !== name && setHover(name)}
-                        style={{background: hover === name ? "lightskyblue" : "white"}}
+                        onMouseOver={() => selected !== name && setSelected(name)}
+                        style={{background: selected === name ? "lightskyblue" : "white"}}
                     >
                         {name}
                         <div

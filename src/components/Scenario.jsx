@@ -6,7 +6,7 @@ import Model from "./Model.js"
 
 export default function Scenario(props) {
 
-  const { model, colors, extras, hover, setHover } = props
+  const { model, colors, extras, selected, setSelected } = props
 
   const FallbackModel = () =>
     <Billboard>
@@ -50,8 +50,8 @@ export default function Scenario(props) {
                 colors={colors}
                 extras={extras}
                 modelFile={modelFile}
-                hover={hover}
-                setHover={setHover}
+                selected={selected}
+                setSelected={setSelected}
               />
             </PresentationControls>
           </Selection>

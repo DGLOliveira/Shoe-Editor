@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei"
 import { Select } from "@react-three/postprocessing"
 export default function Model(props) {
 
-    const { colors, extras, modelFile, hover, setHover } = props
+    const { colors, extras, modelFile, selected, setSelected } = props
 
     //Iterate through all the meshes and activate shadows
     function setShadow(meshes) {
@@ -37,11 +37,11 @@ export default function Model(props) {
         })
     }
 
-    const markHover = (name) => {
+    const markselected = (name) => {
         if (colors[name] !== undefined) {
-            setHover(name)
+            setSelected(name)
         } else {
-            setHover(null)
+            setSelected("")
         }
     }
 
@@ -55,7 +55,7 @@ export default function Model(props) {
         function generateObjects(obj) {
             if (obj.isObject3D && obj.name !== "Scene") {
                 if (obj.isMesh) {
-                    return <Select enabled={hover === obj.material.name} key={obj.name}>
+                    return <Select enabled={selected === obj.material.name} key={obj.name}>
                         <mesh {...obj} />
                     </Select>
                 } else if (obj.isGroup) {
@@ -68,7 +68,7 @@ export default function Model(props) {
             }
         }
         return (
-            <group onClick={(e) => { e.stopPropagation(); markHover(e.object.material.name) }} >
+            <group onClick={(e) => { e.stopPropagation(); markselected(e.object.material.name) }} >
                 {scene.children.map(node =>
                     generateObjects(node)
                 )}

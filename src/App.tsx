@@ -30,13 +30,13 @@ export default function App() {
     React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>]
     = useState({})
 
-  const [colorSwatch, setColorSwatch]: [boolean, 
+  const [colorSwatch, setColorSwatch]: [boolean,
     React.Dispatch<React.SetStateAction<boolean>>]
     = useState(false)
 
-  const [hover, setHover]: [string | null,
-    React.Dispatch<React.SetStateAction<string | null>>]
-    = useState(null)
+  const [selected, setSelected]: [string,
+    React.Dispatch<React.SetStateAction<string>>]
+    = useState("")
 
   const [copiedColor, setCopiedColor]: [
     string,
@@ -243,7 +243,6 @@ export default function App() {
       <Navbar
         menu={menu}
         setMenu={setMenu}
-        setHover={setHover}
       />
       <Menu
         menu={menu}
@@ -254,15 +253,15 @@ export default function App() {
         setColors={setColors}
         extras={extras}
         setExtras={setExtras}
-        hover={hover}
-        setHover={setHover}
+        selected={selected}
+        setSelected={setSelected}
         copiedColor={copiedColor}
         setCopiedColor={setCopiedColor}
         canCopy={canCopy}
       />
       <Selector
-        hover={hover}
-        setHover={setHover}
+        selected={selected}
+        setSelected={setSelected}
         colorSwatch={colorSwatch}
         setColorSwatch={setColorSwatch}
         colors={colors}
@@ -271,12 +270,12 @@ export default function App() {
         model={model}
         colors={colors}
         extras={extras}
-        hover={hover}
-        setHover={setHover}
+        selected={selected}
+        setSelected={setSelected}
       />}
       <ColorSwatch
-        hover={hover}
-        setHover={setHover}
+        selected={selected}
+        setSelected={setSelected}
         colors={colors}
         setColors={setColors}
         copiedColor={copiedColor}
