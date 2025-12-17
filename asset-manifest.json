@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Shoe-Editor/static/css/main.2e7767fe.css",
-    "main.js": "/Shoe-Editor/static/js/main.54151654.js",
+    "main.css": "/Shoe-Editor/static/css/main.8958ec71.css",
+    "main.js": "/Shoe-Editor/static/js/main.2a4863a1.js",
     "static/js/994.1380df28.chunk.js": "/Shoe-Editor/static/js/994.1380df28.chunk.js",
     "static/js/930.c0d007ea.chunk.js": "/Shoe-Editor/static/js/930.c0d007ea.chunk.js",
     "static/js/145.09fe8b69.chunk.js": "/Shoe-Editor/static/js/145.09fe8b69.chunk.js",
@@ -9,11 +9,11 @@
     "static/media/Skater_Sneaker.glb": "/Shoe-Editor/static/media/Skater_Sneaker.b90df37d10a47b9b15f3.glb",
     "static/media/Canvas_Sneaker.glb": "/Shoe-Editor/static/media/Canvas_Sneaker.aaf7b83a704b27a7d83d.glb",
     "index.html": "/Shoe-Editor/index.html",
-    "main.2e7767fe.css.map": "/Shoe-Editor/static/css/main.2e7767fe.css.map",
-    "main.54151654.js.map": "/Shoe-Editor/static/js/main.54151654.js.map"
+    "main.8958ec71.css.map": "/Shoe-Editor/static/css/main.8958ec71.css.map",
+    "main.2a4863a1.js.map": "/Shoe-Editor/static/js/main.2a4863a1.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e7767fe.css",
-    "static/js/main.54151654.js"
+    "static/css/main.8958ec71.css",
+    "static/js/main.2a4863a1.js"
   ]
 }
