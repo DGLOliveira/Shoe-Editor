@@ -131,6 +131,13 @@ input[type="checkbox"] {
   }
 }
 
+#scenario{
+  position: absolute; 
+  height: calc(100vh - 50px);
+  width: 100%;
+  top: 50px;
+  left: 0;
+}
 
 ul {
   position: absolute;

@@ -27,7 +27,7 @@ export default function Scenario(props) {
   }, [model])
 
   return (
-    <Canvas shadows style={{position: "absolute", height: "calc(100vh-50px)", top:"50px", left: "0"}}>
+    <Canvas shadows id="scenario" >
       <OrbitControls
         target={[0, 0, 0]}
         enablePan={false}
