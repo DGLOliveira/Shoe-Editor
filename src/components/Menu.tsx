@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
-import { MdContentCopy } from "react-icons/md";
-import { MdContentPaste } from "react-icons/md";
+import { MdContentCopy, MdContentPaste} from "react-icons/md";
+import { FaLink, FaTelegramPlane } from "react-icons/fa";
+import { IoLogoFacebook } from "react-icons/io";
+import { IoLogoReddit, IoLogoLinkedin, IoLogoWhatsapp  } from "react-icons/io5";
+import { BsTwitterX } from "react-icons/bs";
+
 export default function Menu(props:
     {
         menu: string,
@@ -19,14 +23,6 @@ export default function Menu(props:
     }
 ) {
     const { menu, model, setModel, models, colors, setColors, extras, setExtras, selected, setSelected, copiedColor, setCopiedColor, canCopy } = props
-
-    const [url, setUrl]:
-        [string, React.Dispatch<React.SetStateAction<string>>]
-        = useState(window.location.href)
-
-    useEffect(() => {
-        if (menu === "share") setUrl(window.location.href)
-    }, [menu])
 
     return (
         <>
@@ -129,18 +125,75 @@ export default function Menu(props:
             </ul>
             <ul className={menu === "share" ? "expandMenu" : ""}>
                 <li className="spacer"></li>
-                <li style={{ flexDirection: "column" }}>
-                    <button
-                        id="copyLinkButton"
-                        onClick={() => navigator.clipboard.writeText(url)}
-                    >Copy Link
-                    </button>
-                    <br />
-                    <textarea
-                        id="linkBox"
-                        value={url}
-                        readOnly={true}
-                    />
+                <li>
+                    <a
+                        id="share-link"
+                        href={window.location.href}
+                        onClick={(e) => {e.preventDefault(); navigator.clipboard.writeText(window.location.href)}}
+                    >
+                        <FaLink />
+                        Copy Link
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="share-facebook"
+                        target="blank"
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                    >
+                    <IoLogoFacebook />
+                    Facebook
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="share-twitter"
+                        target="blank"
+                        href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                    >
+                        <BsTwitterX />
+                        Twitter
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="share-reddit"
+                        target="blank"
+                        href={`https://www.reddit.com/submit?url=${window.location.href}`}
+                    >
+                        <IoLogoReddit />
+                        Reddit
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="share-linkedin"
+                        target="blank"
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`}
+                    >
+                        <IoLogoLinkedin />
+                        LinkedIn
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="share-whatsapp"
+                        target="blank"
+                        href={`https://api.whatsapp.com/send?text=${window.location.href}`}
+                    >
+                        <IoLogoWhatsapp />
+                        Whatsapp
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="share-telegram"
+                        target="blank"
+                        href={`https://t.me/share/url?url=${window.location.href}`}
+                    >
+                        <FaTelegramPlane />
+                        Telegram
+                    </a>
                 </li>
             </ul>
         </>
