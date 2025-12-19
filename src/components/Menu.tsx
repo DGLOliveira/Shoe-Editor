@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { MdContentCopy, MdContentPaste} from "react-icons/md";
 import { FaLink, FaTelegramPlane } from "react-icons/fa";
 import { IoLogoFacebook } from "react-icons/io";

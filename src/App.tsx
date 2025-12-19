@@ -80,8 +80,9 @@ export default function App() {
     let params = urlControler.prototype.get()
     let initModel = {}
     let badURLModel = true
+    let emptyURLModel = Object.keys(params).length === 0 ? true : false
     //Check if URL has Category and Model values and they exist in ModelList
-    if (params.Category && params.Name) {
+    if (params.Category && params.Name && !emptyURLModel) {
       ModelList.map((item) => {
         if (item.Category === params.Category && item.Name === params.Name) {
           initModel = item
@@ -90,7 +91,7 @@ export default function App() {
       })
     }
     //If URL model values don't exist or don't exist in ModelList, use default model
-    if (badURLModel) {
+    if (badURLModel || emptyURLModel) {
       initModel = DEFAULT_MODEL
     }
     //Import model data
@@ -100,6 +101,10 @@ export default function App() {
       console.log("Bad URL model values, using default values")
       setColors(defaultValues.colors)
       setExtras(defaultValues.extras)
+    } else if (emptyURLModel) {
+      console.log("Empty URL model values, using default values")
+      setColors(defaultValues.colors)
+      setExtras(defaultValues.extras)
     }
     //Else compare URL values to default values, validate and assign, otherwise assign default value
     else {
@@ -107,13 +112,13 @@ export default function App() {
       let newColors: { [key: string]: string } = {}
       Object.keys(defaultValues.extras).map((key: string) => {
         if (params[key] !== undefined) {
-          if (params[key] === "true") {
-            newExtras[key] = true
-          } else if (params[key] === "false") {
+          if (params[key] === "false") {
             newExtras[key] = false
           } else {
-            newExtras[key] = defaultValues.extras[key]
+            newExtras[key] = true
           }
+        } else {
+          newExtras[key] = defaultValues.extras[key]
         }
       })
       Object.keys(defaultValues.colors).map((key: string) => {
@@ -121,7 +126,9 @@ export default function App() {
           if (/^#[0-9A-F]{6}$/i.test(params[key])) {
             newColors[key] = params[key]
           } else {
-            console.log(`Invalid color value for ${key}: ${params[key]}`)
+            if (params[key] !== "false") {
+              console.log(`Invalid value value for ${key}: ${params[key]}`)
+            }
             newColors[key] = defaultValues.colors[key]
           }
         }
@@ -153,6 +160,7 @@ export default function App() {
 
   // Verifies if model values have changed, compares to URL values and Updates URL if they are different, pushes to history
   // Note: Timeout prevents flooding history with rapidly changing params inputs
+  // Note: Keys that are shared between extras and colors will have the url value of the color[key] if the extra[key] is true, otherwise value will be false
   useEffect(() => {
     if (model.Category && model.Name) {
       const timeout = setTimeout(() => {
@@ -164,14 +172,14 @@ export default function App() {
           }
           if (!flag) {
             Object.keys(extras).map((key) => {
-              if (params[key] !== String(extras[key])) {
+              if (params[key] !== String(extras[key]) && params[key] !== colors[key]) {
                 flag = true
               }
             })
           }
           if (!flag) {
             Object.keys(colors).map((key) => {
-              if (params[key] !== colors[key]) {
+              if (params[key] !== colors[key] && params[key] !== "false") {
                 flag = true
               }
             })
@@ -206,20 +214,16 @@ export default function App() {
       } else {
         let newColors = colors
         let newExtras = extras
-        Object.keys(newExtras).map((key) => {
-          if (params[key] !== undefined) {
-            if (params[key] === "true") {
-              newExtras[key] = true
-            } else if (params[key] === "false") {
-              newExtras[key] = false
-            }
+        Object.keys(newColors).map((key) => {
+          if (params[key] !== undefined && /^#[0-9A-F]{6}$/i.test(params[key])) {
+            newColors[key] = params[key]
           }
         })
-        Object.keys(newColors).map((key) => {
-          if (params[key] !== undefined) {
-            if (/^#[0-9A-F]{6}$/i.test(params[key])) {
-              newColors[key] = params[key]
-            }
+        Object.keys(newExtras).map((key) => {
+          if (params[key] !== undefined && params[key] === "false") {
+            newExtras[key] = false
+          } else {
+            newExtras[key] = true
           }
         })
         setColors(newColors)
