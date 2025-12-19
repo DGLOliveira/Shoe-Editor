@@ -18,16 +18,10 @@ export default function Navbar(props : {
                     Models
                 </h2>
                 <h2
-                    onClick={() => handleNav("colors")}
-                    className={menu === "colors" ? "selectedMenu" : ""}
+                    onClick={() => handleNav("parts")}
+                    className={menu === "parts" ? "selectedMenu" : ""}
                 >
-                    Colours
-                </h2>
-                <h2
-                    onClick={() => handleNav("extras")}
-                    className={menu === "extras" ? "selectedMenu" : ""}
-                >
-                    Extras
+                    Parts
                 </h2>
                 <h2
                     onClick={() => handleNav("share")}

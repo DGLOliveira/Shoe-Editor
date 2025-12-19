@@ -1,7 +1,7 @@
-import { MdContentCopy, MdContentPaste} from "react-icons/md";
+import { MdContentCopy, MdContentPaste } from "react-icons/md";
 import { FaLink, FaTelegramPlane } from "react-icons/fa";
 import { IoLogoFacebook } from "react-icons/io";
-import { IoLogoReddit, IoLogoLinkedin, IoLogoWhatsapp  } from "react-icons/io5";
+import { IoLogoReddit, IoLogoLinkedin, IoLogoWhatsapp } from "react-icons/io5";
 import { BsTwitterX } from "react-icons/bs";
 
 export default function Menu(props:
@@ -46,24 +46,45 @@ export default function Menu(props:
                     </li>
                 )}
             </ul>
-            <ul className={menu === "colors" ? "expandMenu" : ""}>
+            <ul className={menu === "parts" ? "expandMenu" : ""}>
                 <li className="spacer"></li>
                 {Object.keys(colors).map((name, index, arr) =>
                     <li key={index}
-                        onMouseOver={() => selected !== name && setSelected(name)}
-                        style={{background: selected === name ? "lightskyblue" : "white"}}
-                        >
+                        onClick={() => selected !== name && setSelected(name)}
+                        style={{ background: selected === name ? "lightskyblue" : "white" }}
+                    >
                         {name}
                         <div>
+                            {extras[name] !== undefined &&
+                                <div
+                                    className={!extras[name] ? "switch" : "switch switchOn"}
+                                    onClick={() => {
+                                        setExtras({ ...extras, [name]: !extras[name] })
+                                    }}
+                                >
+                                    <input
+                                        name={name}
+                                        type="checkbox"
+                                        defaultChecked={extras[name]}
+                                    />
+                                    <span
+                                        className={
+                                            !extras[name]
+                                                ? "switchButton"
+                                                : "switchButton switchButtonOn"
+                                        }
+                                    />
+                                </div>
+                            }
                             <button
                                 arial-label="Copy color"
                                 style={{
-                                    background: colors[arr[index]],
+                                    background: colors[name],
                                     cursor: "copy"
                                 }}
                                 onClick={(e) => {
                                     e.stopPropagation()
-                                    setCopiedColor(colors[arr[index]])
+                                    setCopiedColor(colors[name])
                                 }}
                             >
                                 <MdContentCopy />
@@ -71,9 +92,9 @@ export default function Menu(props:
                             <button
                                 arial-label="Paste color"
                                 style={{
-                                     backgroundColor: canCopy ? copiedColor : "transparent",
-                                     cursor: canCopy ? "pointer" : "not-allowed"
-                                     }}
+                                    backgroundColor: canCopy ? copiedColor : "transparent",
+                                    cursor: canCopy ? "pointer" : "not-allowed"
+                                }}
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     setColors({
@@ -88,47 +109,13 @@ export default function Menu(props:
                     </li>
                 )}
             </ul>
-            <ul className={menu === "extras" ? "expandMenu" : ""}>
-                <li className="spacer"></li>
-                {Object.keys(extras).length !== 0 ? Object.keys(extras).map((name, index, arr) =>
-                    <li
-                        key={index}
-                        onClick={() =>
-                            setExtras({
-                                ...extras,
-                                [arr[index]]: !extras[arr[index]]
-                            })
-                        }
-                        onMouseOver={() => selected !== name && setSelected(name)}
-                        style={{background: selected === name ? "lightskyblue" : "white"}}
-                    >
-                        {name}
-                        <div
-                            className={extras[arr[index]] ? "switch switchOn" : "switch"}
-                        >
-                            <input
-                                name={name}
-                                type="checkbox"
-                                defaultChecked={extras[arr[index]]}
-                            />
-                            <span
-                                className={
-                                    extras[arr[index]]
-                                        ? "switchButton switchButtonOn"
-                                        : "switchButton "
-                                }
-                            />
-                        </div>
-                    </li>
-                ) : <li>No extra features available for this model</li>}
-            </ul>
             <ul className={menu === "share" ? "expandMenu" : ""}>
                 <li className="spacer"></li>
                 <li>
                     <a
                         id="share-link"
                         href={window.location.href}
-                        onClick={(e) => {e.preventDefault(); navigator.clipboard.writeText(window.location.href)}}
+                        onClick={(e) => { e.preventDefault(); navigator.clipboard.writeText(window.location.href) }}
                     >
                         <FaLink />
                         Copy Link
@@ -140,8 +127,8 @@ export default function Menu(props:
                         target="blank"
                         href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
                     >
-                    <IoLogoFacebook />
-                    Facebook
+                        <IoLogoFacebook />
+                        Facebook
                     </a>
                 </li>
                 <li>

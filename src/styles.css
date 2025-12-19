@@ -209,11 +209,14 @@ li {
     padding-left: 2px;
     padding-right: 2px;
 
+    & div{
+      margin-right:3px;
+    }
     & button {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
+      width: 26px;
       margin-right: 3px;
       font-size: 12px;
       box-sizing: border-box;
@@ -544,7 +547,7 @@ saturation-slider>slider-thumb {
     height: calc(100vh - 50px);
 
     & li {
-      font-size: 3.5vw;
+      font-size: 3vw;
       padding-left: 1vw;
       padding-right: 1vw;
 
@@ -553,6 +556,7 @@ saturation-slider>slider-thumb {
           min-width: 4.5vw;
           width: 4.5vw;
           height: 4.5vw;
+          font-size: 4.5vw;
         }
 
       }

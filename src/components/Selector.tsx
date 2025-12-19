@@ -47,8 +47,9 @@ export default function Selector(props:
                 style={{ transform: canSetVisibility ? "translateY(25px) translateX(-50%)" : "translateX(-50%)" }}
             >
                         <div
-                            className={extras[selected] ? "switch switchOn" : "switch"}
+                            className={extras[selected] === true || extras[selected] === undefined ? "switch switchOn" : "switch"}
                             onClick={() => {
+                                extras[selected] !== undefined &&
                                 setExtras({ ...extras, [selected]: !extras[selected] })
                             }}
                         >
@@ -58,7 +59,7 @@ export default function Selector(props:
                             />
                             <span
                                 className={
-                                    extras[selected]
+                                    extras[selected] === true || extras[selected] === undefined
                                         ? "switchButton switchButtonOn"
                                         : "switchButton "
                                 }
