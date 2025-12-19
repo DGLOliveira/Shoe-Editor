@@ -14,7 +14,7 @@ export default class urlController {
     update(
         model: { [key: string]: string },
         colors: { [key: string]: string },
-        extras: { [key: string]: boolean }) {
+        visibility: { [key: string]: boolean }) {
         let params = new URLSearchParams(window.location.search)
         //Clear all keys
         let keys = [...params.keys()]
@@ -27,8 +27,8 @@ export default class urlController {
         Object.keys(colors).map((name) => {
             params.set(name, colors[name])
         })
-        Object.keys(extras).map((name) => {
-            if (extras[name] === false) {
+        Object.keys(visibility).map((name) => {
+            if (visibility[name] === false) {
                 params.set(name, "false")
             }
         })

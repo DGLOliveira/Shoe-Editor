@@ -12,8 +12,8 @@ export default function Menu(props:
         models: [{ [key: string]: string }]
         colors: { [key: string]: string }
         setColors: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>
-        extras: { [key: string]: boolean }
-        setExtras: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
+        visibility: { [key: string]: boolean }
+        setVisibility: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
         selected: string
         setSelected: React.Dispatch<React.SetStateAction<string>>
         copiedColor: string
@@ -21,7 +21,7 @@ export default function Menu(props:
         canCopy: boolean
     }
 ) {
-    const { menu, model, setModel, models, colors, setColors, extras, setExtras, selected, setSelected, copiedColor, setCopiedColor, canCopy } = props
+    const { menu, model, setModel, models, colors, setColors, visibility, setVisibility, selected, setSelected, copiedColor, setCopiedColor, canCopy } = props
 
     return (
         <>
@@ -55,21 +55,21 @@ export default function Menu(props:
                     >
                         {name}
                         <div>
-                            {extras[name] !== undefined &&
+                            {visibility[name] !== undefined &&
                                 <div
-                                    className={!extras[name] ? "switch" : "switch switchOn"}
+                                    className={!visibility[name] ? "switch" : "switch switchOn"}
                                     onClick={() => {
-                                        setExtras({ ...extras, [name]: !extras[name] })
+                                        setVisibility({ ...visibility, [name]: !visibility[name] })
                                     }}
                                 >
                                     <input
                                         name={name}
                                         type="checkbox"
-                                        defaultChecked={extras[name]}
+                                        defaultChecked={visibility[name]}
                                     />
                                     <span
                                         className={
-                                            !extras[name]
+                                            !visibility[name]
                                                 ? "switchButton"
                                                 : "switchButton switchButtonOn"
                                         }

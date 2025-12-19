@@ -26,7 +26,7 @@ export default function App() {
     React.Dispatch<React.SetStateAction<{ [key: string]: string }>>]
     = useState({})
 
-  const [extras, setExtras]: [{ [key: string]: boolean },
+  const [visibility, setVisibility]: [{ [key: string]: boolean },
     React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>]
     = useState({})
 
@@ -60,7 +60,7 @@ export default function App() {
       (error) => { console.error(error); console.log(newModel) }
     )
     let newColors: { [key: string]: string } = {}
-    let newExtras: { [key: string]: boolean } = {}
+    let newvisibility: { [key: string]: boolean } = {}
     if (response && response.modifiers !== undefined) {
       if (response.modifiers.materials !== undefined) {
         Object.keys(response.modifiers.materials).map((key) => {
@@ -69,11 +69,11 @@ export default function App() {
       }
       if (response.modifiers.meshes !== undefined) {
         Object.keys(response.modifiers.meshes).map((key) => {
-          newExtras[key] = response.modifiers.meshes[key].visible
+          newvisibility[key] = response.modifiers.meshes[key].visible
         })
       }
     }
-    return { colors: newColors, extras: newExtras }
+    return { colors: newColors, visibility: newvisibility }
   }
 
   const setInitModel = async () => {
@@ -100,25 +100,25 @@ export default function App() {
     if (badURLModel) {
       console.log("Bad URL model values, using default values")
       setColors(defaultValues.colors)
-      setExtras(defaultValues.extras)
+      setVisibility(defaultValues.visibility)
     } else if (emptyURLModel) {
       console.log("Empty URL model values, using default values")
       setColors(defaultValues.colors)
-      setExtras(defaultValues.extras)
+      setVisibility(defaultValues.visibility)
     }
     //Else compare URL values to default values, validate and assign, otherwise assign default value
     else {
-      let newExtras: { [key: string]: boolean } = {}
+      let newvisibility: { [key: string]: boolean } = {}
       let newColors: { [key: string]: string } = {}
-      Object.keys(defaultValues.extras).map((key: string) => {
+      Object.keys(defaultValues.visibility).map((key: string) => {
         if (params[key] !== undefined) {
           if (params[key] === "false") {
-            newExtras[key] = false
+            newvisibility[key] = false
           } else {
-            newExtras[key] = true
+            newvisibility[key] = true
           }
         } else {
-          newExtras[key] = defaultValues.extras[key]
+          newvisibility[key] = defaultValues.visibility[key]
         }
       })
       Object.keys(defaultValues.colors).map((key: string) => {
@@ -133,7 +133,7 @@ export default function App() {
           }
         }
       })
-      setExtras(newExtras)
+      setVisibility(newvisibility)
       setColors(newColors)
     }
     setModel(initModel)
@@ -148,7 +148,7 @@ export default function App() {
   async function changeModel(model: { [key: string]: string }) {
     const defaultValues = await importData(model)
     setColors(defaultValues.colors)
-    setExtras(defaultValues.extras)
+    setVisibility(defaultValues.visibility)
   }
 
   useEffect(() => {
@@ -160,19 +160,19 @@ export default function App() {
 
   // Verifies if model values have changed, compares to URL values and Updates URL if they are different, pushes to history
   // Note: Timeout prevents flooding history with rapidly changing params inputs
-  // Note: Keys that are shared between extras and colors will have the url value of the color[key] if the extra[key] is true, otherwise value will be false
+  // Note: Keys that are shared between visibility and colors will have the url value of the color[key] if the extra[key] is true, otherwise value will be false
   useEffect(() => {
     if (model.Category && model.Name) {
       const timeout = setTimeout(() => {
-        if (model && colors && extras) {
+        if (model && colors && visibility) {
           let flag = false
           let params = urlControler.prototype.get()
           if (params.Category !== model.Category || params.Name !== model.Name) {
             flag = true
           }
           if (!flag) {
-            Object.keys(extras).map((key) => {
-              if (params[key] !== String(extras[key]) && params[key] !== colors[key]) {
+            Object.keys(visibility).map((key) => {
+              if (params[key] !== String(visibility[key]) && params[key] !== colors[key]) {
                 flag = true
               }
             })
@@ -185,7 +185,7 @@ export default function App() {
             })
           }
           if (flag) {
-            urlControler.prototype.update(model, colors, extras)
+            urlControler.prototype.update(model, colors, visibility)
           }
         }
       }, 500)
@@ -193,7 +193,7 @@ export default function App() {
         return () => clearTimeout(timeout)
       }
     }
-  }, [model, colors, extras])
+  }, [model, colors, visibility])
 
   //Verifies and updates values from URL, to be used on history changes
 
@@ -213,21 +213,21 @@ export default function App() {
         setInitModel()
       } else {
         let newColors = colors
-        let newExtras = extras
+        let newvisibility = visibility
         Object.keys(newColors).map((key) => {
           if (params[key] !== undefined && /^#[0-9A-F]{6}$/i.test(params[key])) {
             newColors[key] = params[key]
           }
         })
-        Object.keys(newExtras).map((key) => {
+        Object.keys(newvisibility).map((key) => {
           if (params[key] !== undefined && params[key] === "false") {
-            newExtras[key] = false
+            newvisibility[key] = false
           } else {
-            newExtras[key] = true
+            newvisibility[key] = true
           }
         })
         setColors(newColors)
-        setExtras(newExtras)
+        setVisibility(newvisibility)
         setRenderOnPop(!renderOnPop)
       }
     } else {
@@ -255,8 +255,8 @@ export default function App() {
         models={models}
         colors={colors}
         setColors={setColors}
-        extras={extras}
-        setExtras={setExtras}
+        visibility={visibility}
+        setVisibility={setVisibility}
         selected={selected}
         setSelected={setSelected}
         copiedColor={copiedColor}
@@ -269,13 +269,13 @@ export default function App() {
         colorSwatch={colorSwatch}
         setColorSwatch={setColorSwatch}
         colors={colors}
-        extras={extras}
-        setExtras={setExtras}
+        visibility={visibility}
+        setVisibility={setVisibility}
       />
-      {model && colors && extras && <Scenario
+      {model && colors && visibility && <Scenario
         model={model}
         colors={colors}
-        extras={extras}
+        visibility={visibility}
         selected={selected}
         setSelected={setSelected}
       />}

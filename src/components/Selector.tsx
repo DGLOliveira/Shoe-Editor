@@ -6,13 +6,13 @@ export default function Selector(props:
         colorSwatch: boolean,
         setColorSwatch: React.Dispatch<React.SetStateAction<boolean>>,
         colors: { [key: string]: string },
-        extras: { [key: string]: boolean }
-        setExtras: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
+        visibility: { [key: string]: boolean }
+        setVisibility: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>
     }) {
 
-    const { selected, setSelected, colorSwatch, setColorSwatch, colors, extras, setExtras } = props
+    const { selected, setSelected, colorSwatch, setColorSwatch, colors, visibility, setVisibility } = props
 
-    const [canSetVisibility, setCanSetVisibility]: [boolean,
+    const [cansetVisibility, setCansetVisibility]: [boolean,
         React.Dispatch<React.SetStateAction<boolean>>]
         = useState(false);
 
@@ -32,34 +32,34 @@ export default function Selector(props:
 
     useEffect(() => {
         if (selected === "") setColorSwatch(false);
-        let newCanSetVisibility = false
-        Object.keys(extras).map((key) => {
+        let newCansetVisibility = false
+        Object.keys(visibility).map((key) => {
             if (selected === key) {
-                newCanSetVisibility = true
+                newCansetVisibility = true
             }
         })
-        setCanSetVisibility(newCanSetVisibility)
+        setCansetVisibility(newCansetVisibility)
     }, [selected])
 
     return (
         <>
             <div id="visibility"
-                style={{ transform: canSetVisibility ? "translateY(25px) translateX(-50%)" : "translateX(-50%)" }}
+                style={{ transform: cansetVisibility ? "translateY(25px) translateX(-50%)" : "translateX(-50%)" }}
             >
                         <div
-                            className={extras[selected] === true || extras[selected] === undefined ? "switch switchOn" : "switch"}
+                            className={visibility[selected] === true || visibility[selected] === undefined ? "switch switchOn" : "switch"}
                             onClick={() => {
-                                extras[selected] !== undefined &&
-                                setExtras({ ...extras, [selected]: !extras[selected] })
+                                visibility[selected] !== undefined &&
+                                setVisibility({ ...visibility, [selected]: !visibility[selected] })
                             }}
                         >
                             <input
                                 type="checkbox"
-                                defaultChecked={extras[selected]}
+                                defaultChecked={visibility[selected]}
                             />
                             <span
                                 className={
-                                    extras[selected] === true || extras[selected] === undefined
+                                    visibility[selected] === true || visibility[selected] === undefined
                                         ? "switchButton switchButtonOn"
                                         : "switchButton "
                                 }

@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei"
 import { Select } from "@react-three/postprocessing"
 export default function Model(props) {
 
-    const { colors, extras, modelFile, selected, setSelected } = props
+    const { colors, visibility, modelFile, selected, setSelected } = props
 
     //Iterate through all the meshes and activate shadows
     function setShadow(meshes) {
@@ -28,8 +28,8 @@ export default function Model(props) {
     //Iterate through all the meshes and set visibility
     function setVisibility(meshes) {
         meshes.forEach((mesh) => {
-            if (extras[mesh.name] !== undefined) {
-                mesh.visible = extras[mesh.name]
+            if (visibility[mesh.name] !== undefined) {
+                mesh.visible = visibility[mesh.name]
             }
             if (mesh.children.length > 0) {
                 setVisibility(mesh.children)

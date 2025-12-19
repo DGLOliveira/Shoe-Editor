@@ -6,7 +6,7 @@ import Model from "./Model.js"
 
 export default function Scenario(props) {
 
-  const { model, colors, extras, selected, setSelected } = props
+  const { model, colors, visibility, selected, setSelected } = props
 
   const FallbackModel = () =>
     <Billboard>
@@ -48,7 +48,7 @@ export default function Scenario(props) {
             >
               <Model
                 colors={colors}
-                extras={extras}
+                visibility={visibility}
                 modelFile={modelFile}
                 selected={selected}
                 setSelected={setSelected}
