@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkshoe_editor=self.webpackChunkshoe_editor||[]).push([[145],{145:(e,a,s)=>{e.exports=s.p+"static/media/Canvas_Sneaker.aaf7b83a704b27a7d83d.glb"}}]);
