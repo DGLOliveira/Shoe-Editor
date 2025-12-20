@@ -1,7 +1,7 @@
+# [Live website](https://dgloliveira.github.io/Shoe-Editor/)
+
 ![Preview 1](docs/Shoe_Editor_Portfolio_Preview.png)
 ![Preview 2](docs/Shoe_Editor_Readme_Preview.png)
-
-[Live website](https://dgloliveira.github.io/Shoe-Editor/)
 
 # Summary
 
