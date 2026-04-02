@@ -1,7 +1,7 @@
 {
   "name": "3D Shoe Editor",
   "short_name": "Shoe Editor",
-  "start_url": "/",
+  "start_url": "/Shoe-Editor/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
