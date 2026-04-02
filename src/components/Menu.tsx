@@ -26,16 +26,18 @@ export default function Menu(props:
     return (
         <>
             <ul className={menu === "models" ? "expandMenu" : "collapsedMenu"}>
-                <li className="spacer"></li>
+                <li className="spacer" arial-label="hidden"></li>
                 {models.map((item, index) =>
                     <li
                         key={index}
                         onClick={() => {
                             setModel({ ...item })
                         }}
+                        aria-role="button"
                     >
-                        {item.Name}
+                        <label for={item.Name}>{item.Name}</label>
                         <input
+                            id={item.Name}
                             type="radio"
                             name="model"
                             checked={item.Name === model.Name}
@@ -47,11 +49,14 @@ export default function Menu(props:
                 )}
             </ul>
             <ul className={menu === "parts" ? "expandMenu" : "collapsedMenu"}>
-                <li className="spacer"></li>
+                <li className="spacer" arial-label="hidden"></li>
                 {Object.keys(colors).map((name, index, arr) =>
-                    <li key={index}
+                    <li 
+                        key={index}
                         onClick={() => selected !== name && setSelected(name)}
                         style={{ background: selected === name ? "lightskyblue" : "white" }}
+                        aria-role="button"
+                        aria-label="Select part"
                     >
                         {name}
                         <div>
@@ -66,6 +71,7 @@ export default function Menu(props:
                                         name={name}
                                         type="checkbox"
                                         defaultChecked={visibility[name]}
+                                        aria-label="Switch visibility"
                                     />
                                     <span
                                         className={
@@ -78,6 +84,7 @@ export default function Menu(props:
                             }
                             <button
                                 arial-label="Copy color"
+                                title="Copy color"
                                 style={{
                                     background: colors[name],
                                     cursor: "copy"
@@ -87,9 +94,10 @@ export default function Menu(props:
                                     setCopiedColor(colors[name])
                                 }}
                             >
-                                <MdContentCopy />
+                                <span aria-hidden="true"><MdContentCopy /></span>
                             </button>
                             <button
+                                title="Paste color"
                                 arial-label="Paste color"
                                 style={{
                                     backgroundColor: canCopy ? copiedColor : "transparent",
@@ -103,21 +111,21 @@ export default function Menu(props:
                                     })
                                 }}
                             >
-                                <MdContentPaste />
+                                <span aria-hidden="true"><MdContentPaste /></span>
                             </button>
                         </div>
                     </li>
                 )}
             </ul>
             <ul className={menu === "share" ? "expandMenu" : "collapsedMenu"}>
-                <li className="spacer"></li>
+                <li className="spacer" aria-hidden="true"></li>
                 <li>
                     <a
                         id="share-link"
                         href={window.location.href}
                         onClick={(e) => { e.preventDefault(); navigator.clipboard.writeText(window.location.href) }}
                     >
-                        <FaLink />
+                        <span aria-hidden="true"><FaLink /></span>
                         Copy Link
                     </a>
                 </li>
@@ -127,7 +135,7 @@ export default function Menu(props:
                         target="blank"
                         href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
                     >
-                        <IoLogoFacebook />
+                        <span aria-hidden="true"><IoLogoFacebook /></span>
                         Facebook
                     </a>
                 </li>
@@ -137,7 +145,7 @@ export default function Menu(props:
                         target="blank"
                         href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
                     >
-                        <BsTwitterX />
+                        <span aria-hidden="true"><BsTwitterX /></span>
                         Twitter
                     </a>
                 </li>
@@ -147,7 +155,7 @@ export default function Menu(props:
                         target="blank"
                         href={`https://www.reddit.com/submit?url=${window.location.href}`}
                     >
-                        <IoLogoReddit />
+                        <span aria-hidden="true"><IoLogoReddit /></span>
                         Reddit
                     </a>
                 </li>
@@ -157,7 +165,7 @@ export default function Menu(props:
                         target="blank"
                         href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`}
                     >
-                        <IoLogoLinkedin />
+                        <span aria-hidden="true"><IoLogoLinkedin /></span>
                         LinkedIn
                     </a>
                 </li>
@@ -167,7 +175,7 @@ export default function Menu(props:
                         target="blank"
                         href={`https://api.whatsapp.com/send?text=${window.location.href}`}
                     >
-                        <IoLogoWhatsapp />
+                        <span aria-hidden="true"><IoLogoWhatsapp /></span>
                         Whatsapp
                     </a>
                 </li>
@@ -177,7 +185,7 @@ export default function Menu(props:
                         target="blank"
                         href={`https://t.me/share/url?url=${window.location.href}`}
                     >
-                        <FaTelegramPlane />
+                        <span aria-hidden="true"><FaTelegramPlane /></span>
                         Telegram
                     </a>
                 </li>

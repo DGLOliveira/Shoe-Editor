@@ -56,6 +56,7 @@ export default function Selector(props:
                             <input
                                 type="checkbox"
                                 defaultChecked={visibility[selected]}
+                                aria-label="Toggle visibility of selected part"
                             />
                             <span
                                 className={
@@ -72,17 +73,37 @@ export default function Selector(props:
                         id="openColors"
                         className={colorSwatch ? "active" : ""}
                         disabled={selected === ""}
-                        onClick={() => setColorSwatch(!colorSwatch)}>
+                        onClick={() => setColorSwatch(!colorSwatch)}
+                        title="Open color swatch"
+                        aria-label="Open color swatch"
+                    >
                     </button>
-                    <button onClick={() => changePart(-1)}>◄</button>
+                    <button 
+                    onClick={() => changePart(-1)}
+                    title="Select previous part"
+                    aria-label="Select previous Shoe part"
+                    >
+                        <span aria-hidden="true">◄</span>
+                    </button>
                 </div>
+                <span aria-label="Selected Shoe part">  
                 {selected !== "" ? selected : "Select a part"}
+                </span>
                 <div>
-                    <button onClick={() => changePart(1)}>►</button>
+                    <button 
+                    onClick={() => changePart(1)}
+                    title="Select next part"
+                    aria-label="Select next Shoe part"
+                    >
+                        <span aria-hidden="true">►</span>
+                    </button>
                     <button
                         className={selected === "" ? "active" : ""}
-                        onClick={() => { setSelected(""); setColorSwatch(false) }}>
-                        Ø
+                        onClick={() => { setSelected(""); setColorSwatch(false) }}
+                        title="Unselect shoe part"
+                        aria-label="Unselect shoe part"
+                        >
+                        <span aria-hidden="true">Ø</span>
                     </button>
                 </div>
             </div>
