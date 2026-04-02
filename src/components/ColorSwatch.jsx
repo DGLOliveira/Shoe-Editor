@@ -314,7 +314,7 @@ export default function ColorSwatch(props) {
     }, [selectedInputs, hex])
 
     return (
-        <div id="colorSwatch" style={{transform: colorSwatch ? "" : "translateY(276px)" }}>
+        <div id="colorSwatch" style={{transform: colorSwatch ? "" : "translateY(276px)", visibility: colorSwatch ? "visible" : "hidden" }}>
             <div id="colorSliders">
                 <hue-light-map>
                     <canvas

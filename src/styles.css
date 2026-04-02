@@ -135,7 +135,14 @@ ul {
 }
 
 .expandMenu {
+  visibility: visible;
   right: 0px;
+  transition-delay: 0.3s;
+}
+
+.collapsedMenu {
+  visibility: hidden;
+  right: -200px;
   transition-delay: 0.3s;
 }
 

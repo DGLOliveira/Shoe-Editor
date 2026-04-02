@@ -25,7 +25,7 @@ export default function Menu(props:
 
     return (
         <>
-            <ul className={menu === "models" ? "expandMenu" : ""}>
+            <ul className={menu === "models" ? "expandMenu" : "collapsedMenu"}>
                 <li className="spacer"></li>
                 {models.map((item, index) =>
                     <li
@@ -46,7 +46,7 @@ export default function Menu(props:
                     </li>
                 )}
             </ul>
-            <ul className={menu === "parts" ? "expandMenu" : ""}>
+            <ul className={menu === "parts" ? "expandMenu" : "collapsedMenu"}>
                 <li className="spacer"></li>
                 {Object.keys(colors).map((name, index, arr) =>
                     <li key={index}
@@ -109,7 +109,7 @@ export default function Menu(props:
                     </li>
                 )}
             </ul>
-            <ul className={menu === "share" ? "expandMenu" : ""}>
+            <ul className={menu === "share" ? "expandMenu" : "collapsedMenu"}>
                 <li className="spacer"></li>
                 <li>
                     <a
